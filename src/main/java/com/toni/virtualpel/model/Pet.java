@@ -1,24 +1,44 @@
 package com.toni.virtualpel.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "pets")
 public class Pet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "pet_name")
+    @NotBlank
     private String name;
-    private Date birthDate;
+
+    @NotBlank
+    @Enumerated(EnumType.STRING)
     private Variant variant;
-    private Stage stage;
-    private int experience;
-    private int level;
+
+    @Enumerated(EnumType.STRING)
+    private Stage stage = Stage.EGG;
+
+    private int experience = 0;
     private boolean readyToEvolve;
-    private int energy;
-    private int happiness;
-    private int hunger;
+    private int energy = 10;
+    private int happiness = 10;
+    private int hunger = 10;
     private User owner;
 
     public enum Variant {
-        MOUNTAIN , LAKE , FOREST
+        MOUNTAIN , SWAMP , FOREST
     }
 
     public enum Stage {
@@ -30,11 +50,9 @@ public class Pet {
         return "Pet: " + "\n" +
                 "Id: " + id + "\n" +
                 "Name: " + name + "\n" +
-                "Birth Date: " + birthDate + "\n" +
                 "Variant: " + variant + "\n" +
                 "Stage: " + stage + "\n" +
                 "Experience: " + experience + "\n" +
-                "Level: " + level + "\n" +
                 "Ready To Evolve: " + readyToEvolve + "\n" +
                 "Energy: " + energy + "\n" +
                 "Happiness: " + happiness + "\n" +
