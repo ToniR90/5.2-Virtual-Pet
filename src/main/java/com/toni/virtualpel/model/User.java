@@ -3,10 +3,14 @@ package com.toni.virtualpel.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,5 +35,18 @@ public class User {
 
     @NotBlank
     @Column(name = "password", nullable = false, unique = true)
+    @Size(min = 6 , message = "Password minimum length is 6 chars")
     private String password;
+
+    @NotNull(message = "User role must be specified")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.PLAYER;
+
+    @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true)
+    private List<Pet> pets;
+
+    public enum Role {
+        ADMIN , PLAYER
+    }
 }
