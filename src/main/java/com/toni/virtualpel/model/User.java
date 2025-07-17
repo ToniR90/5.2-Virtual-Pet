@@ -49,4 +49,15 @@ public class User {
     public enum Role {
         ADMIN , PLAYER
     }
+
+    @Override
+    public String toString() {
+        return "User: " + "\n" +
+                "Id: " + id + "\n" +
+                "User Name: " + userName + "\n" +
+                "Email: " + email + "\n" +
+                "Password: " + password + "\n" +
+                "Role: " + role + "\n" +
+                "Pets: " + pets;
+    }
 }
