@@ -1,5 +1,7 @@
 package com.toni.virtualpel.model;
 
+import com.toni.virtualpel.model.enums.Stage;
+import com.toni.virtualpel.model.enums.Variant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -50,14 +52,6 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "user_id" , nullable = false)
     private User owner;
-
-    public enum Variant {
-        MOUNTAIN , SWAMP , FOREST
-    }
-
-    public enum Stage {
-        EGG , YOUNG , ADULT , ANCIENT
-    }
 
     @Override
     public String toString() {
