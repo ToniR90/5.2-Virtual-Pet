@@ -1,5 +1,6 @@
 package com.toni.virtualpel.model;
 
+import com.toni.virtualpel.model.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -45,10 +46,6 @@ public class User {
 
     @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Pet> pets;
-
-    public enum Role {
-        ADMIN , PLAYER
-    }
 
     @Override
     public String toString() {
