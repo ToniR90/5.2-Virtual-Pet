@@ -26,7 +26,8 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Column(name = "user_name", nullable = false)
+    @Size(min = 3 , max = 20 , message = "The username must have 3 - 20 chars")
+    @Column(name = "user_name" , unique = true , nullable = false)
     private String userName;
 
     @NotBlank
@@ -35,7 +36,7 @@ public class User {
     private String email;
 
     @NotBlank
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(name = "password", nullable = false)
     @Size(min = 6 , message = "Password minimum length is 6 chars")
     private String password;
 
