@@ -48,15 +48,44 @@ public class Pet {
     @Column(nullable = false)
     private int hunger = 10;
 
-    @Column(nullable = false)
-    private boolean readyToEvolve;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id" , nullable = false)
     private User owner;
 
     @OneToMany(mappedBy = "pet" , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private List<PetAction> actions;
+
+    public void addExperience(int experience) {
+        this.experience += experience;
+        updateStage();
+    }
+
+    public void updateStage() {
+        this.stage = Stage.getStageForExperience(this.experience);
+    }
+
+    public void feed() {
+        this.hunger = Math.min(100 , this.hunger + 20);
+        this.happiness = Math.min(100 , this.happiness + 5);
+        addExperience(1);
+    }
+
+    public void play() {
+        this.happiness = Math.min(100 , this.happiness + 15);
+        this.energy = Math.max(0 , this.energy - 10);
+        this.hunger = Math.max(0 , this.hunger - 5);
+        addExperience(1);
+    }
+
+    public void rest () {
+        this.energy = Math.min(100 , this.energy + 25);
+        this.happiness = Math.min(100 , this.happiness + 5);
+        addExperience(1);
+    }
+
+    public boolean canEvolve() {
+        return this.experience >= this.stage.getMaxExperience() + 1 && this.stage != Stage.ANCIENT;
+    }
 
     @Override
     public String toString() {
@@ -66,7 +95,6 @@ public class Pet {
                 "Variant: " + variant + "\n" +
                 "Stage: " + stage + "\n" +
                 "Experience: " + experience + "\n" +
-                "Ready To Evolve: " + readyToEvolve + "\n" +
                 "Energy: " + energy + "\n" +
                 "Happiness: " + happiness + "\n" +
                 "Hunger: " + hunger + "\n" +
