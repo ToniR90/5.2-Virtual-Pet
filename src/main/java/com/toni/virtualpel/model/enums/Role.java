@@ -1,5 +1,5 @@
 package com.toni.virtualpel.model.enums;
 
 public enum Role {
-    ADMIN , PLAYER
+    ROLE_USER , ROLE_ADMIN
 }
