@@ -4,6 +4,7 @@ import com.toni.virtualpel.model.enums.Stage;
 import com.toni.virtualpel.model.enums.Variant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Pet {
 
     @Column(name = "pet_name" , nullable = false)
     @NotBlank
+    @Size(min = 1 , max = 20 , message = "Pet name must be 1- 20 chars long")
     private String name;
 
     @NotBlank
@@ -49,9 +51,12 @@ public class Pet {
     @Column(nullable = false)
     private boolean readyToEvolve;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id" , nullable = false)
     private User owner;
+
+    @OneToMany(mappedBy = "pet" , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    private List<PetAction> actions;
 
     @Override
     public String toString() {

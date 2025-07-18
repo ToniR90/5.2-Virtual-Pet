@@ -45,7 +45,7 @@ public class User {
     @Column(nullable = false)
     private Role role = Role.PLAYER;
 
-    @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true)
+    @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
     private List<Pet> pets;
 
     @Override
