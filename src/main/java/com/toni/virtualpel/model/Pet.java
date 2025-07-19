@@ -39,16 +39,16 @@ public class Pet extends AuditableEntity {
     private Stage stage = Stage.EGG;
 
     @Column(nullable = false)
-    private int experience = 0;
+    private Integer experience = 0;
 
     @Column(nullable = false)
-    private int energy = 50;
+    private Integer energy = 50;
 
     @Column(nullable = false)
-    private int happiness = 50;
+    private Integer happiness = 50;
 
     @Column(nullable = false)
-    private int hunger = 50;
+    private Integer hunger = 50;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id" , nullable = false)
