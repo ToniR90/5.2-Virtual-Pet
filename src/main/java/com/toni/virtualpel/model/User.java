@@ -1,26 +1,25 @@
 package com.toni.virtualpel.model;
 
+import com.toni.virtualpel.model.base.AuditableEntity;
 import com.toni.virtualpel.model.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,12 +45,6 @@ public class User {
     @Column(nullable = false)
     private Role role = Role.ROLE_USER;
 
-    @Column(name = "created_at" , nullable = false)
-    private LocalTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalTime updatedAt;
-
     @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
     private List<Pet> pets;
 
@@ -61,8 +54,6 @@ public class User {
                 "Id: " + id + "\n" +
                 "User Name: " + userName + "\n" +
                 "Email: " + email + "\n" +
-                "Password: " + password + "\n" +
-                "Role: " + role + "\n" +
-                "Pets: " + pets;
+                "Role: " + role + "\n";
     }
 }
