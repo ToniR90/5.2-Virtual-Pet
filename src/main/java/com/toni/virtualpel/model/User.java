@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -43,7 +44,13 @@ public class User {
     @NotNull(message = "User role must be specified")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.PLAYER;
+    private Role role = Role.ROLE_USER;
+
+    @Column(name = "created_at" , nullable = false)
+    private LocalTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalTime updatedAt;
 
     @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
     private List<Pet> pets;
