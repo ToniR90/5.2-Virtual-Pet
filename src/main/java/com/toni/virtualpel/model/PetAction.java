@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -21,8 +23,11 @@ public class PetAction {
     @Column(nullable = false)
     private ActionType actionType;
 
+    @Column(name = "performed_at" , nullable = false)
+    private LocalDateTime performedAt;
+
     @Column(name = "experience_gained")
-    private int experienceGained = 1;
+    private Integer experienceGained = 1;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id" , nullable = false)
@@ -31,6 +36,16 @@ public class PetAction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id" , nullable = false)
     private User user;
+
+    @PrePersist
+    protected void onCreate() {
+        if (performedAt == null) {
+            performedAt = LocalDateTime.now();
+        }
+        if (experienceGained == null) {
+            experienceGained = actionType.getExperienceReward();
+        }
+    }
 
 
     @Override
