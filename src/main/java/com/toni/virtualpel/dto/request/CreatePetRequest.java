@@ -17,6 +17,6 @@ public class CreatePetRequest {
     @Size(min = 1 , max = 20 , message = "Name must be between 1 - 20 chars long")
     private String name;
 
-    @NotNull(message = "The Dragon variant can't be empty")
+    @NotNull(message = "Dragon variant must be selected")
     private Variant variant;
 }
