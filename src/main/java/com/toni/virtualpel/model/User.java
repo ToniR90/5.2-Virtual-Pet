@@ -27,7 +27,7 @@ public class User extends AuditableEntity {
     @NotBlank
     @Size(min = 3 , max = 20 , message = "The username must have 3 - 20 chars")
     @Column(name = "user_name" , unique = true , nullable = false)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Email(message = "Invalid email format")
@@ -52,7 +52,7 @@ public class User extends AuditableEntity {
     public String toString() {
         return "User: " + "\n" +
                 "Id: " + id + "\n" +
-                "User Name: " + userName + "\n" +
+                "User Name: " + username + "\n" +
                 "Email: " + email + "\n" +
                 "Role: " + role + "\n";
     }

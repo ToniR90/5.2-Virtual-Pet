@@ -1,4 +1,4 @@
-package com.toni.virtualpel.dto;
+package com.toni.virtualpel.dto.request;
 
 import com.toni.virtualpel.model.enums.Variant;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,10 @@
 package com.toni.virtualpel.controller;
 
-import com.toni.virtualpel.dto.*;
+import com.toni.virtualpel.dto.request.LoginRequest;
+import com.toni.virtualpel.dto.request.RegisterRequest;
+import com.toni.virtualpel.dto.response.ApiResponse;
+import com.toni.virtualpel.dto.response.JwtResponse;
+import com.toni.virtualpel.dto.response.UserResponse;
 import com.toni.virtualpel.model.User;
 import com.toni.virtualpel.service.AuthService;
 import jakarta.validation.Valid;

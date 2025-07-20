@@ -1,9 +1,8 @@
 package com.toni.virtualpel.service;
 
-import com.toni.virtualpel.dto.CreatePetRequest;
-import com.toni.virtualpel.dto.PetResponse;
+import com.toni.virtualpel.dto.request.CreatePetRequest;
+import com.toni.virtualpel.dto.response.PetResponse;
 import com.toni.virtualpel.model.Pet;
-import com.toni.virtualpel.model.PetAction;
 import com.toni.virtualpel.model.User;
 import com.toni.virtualpel.model.enums.ActionType;
 import com.toni.virtualpel.model.enums.Stage;

@@ -1,8 +1,8 @@
 package com.toni.virtualpel.service;
 
-import com.toni.virtualpel.dto.JwtResponse;
-import com.toni.virtualpel.dto.LoginRequest;
-import com.toni.virtualpel.dto.RegisterRequest;
+import com.toni.virtualpel.dto.response.JwtResponse;
+import com.toni.virtualpel.dto.request.LoginRequest;
+import com.toni.virtualpel.dto.request.RegisterRequest;
 import com.toni.virtualpel.model.User;
 import com.toni.virtualpel.repository.UserRepository;
 import com.toni.virtualpel.security.JwtUtils;

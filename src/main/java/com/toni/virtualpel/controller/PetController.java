@@ -1,8 +1,8 @@
 package com.toni.virtualpel.controller;
 
-import com.toni.virtualpel.dto.ApiResponse;
-import com.toni.virtualpel.dto.CreatePetRequest;
-import com.toni.virtualpel.dto.PetResponse;
+import com.toni.virtualpel.dto.response.ApiResponse;
+import com.toni.virtualpel.dto.request.CreatePetRequest;
+import com.toni.virtualpel.dto.response.PetResponse;
 import com.toni.virtualpel.service.PetService;
 import jakarta.validation.Valid;
 import org.slf4j.LoggerFactory;

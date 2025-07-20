@@ -1,4 +1,4 @@
-package com.toni.virtualpel.dto;
+package com.toni.virtualpel.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

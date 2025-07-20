@@ -1,4 +1,4 @@
-package com.toni.virtualpel.dto;
+package com.toni.virtualpel.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

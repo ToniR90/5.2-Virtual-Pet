@@ -1,7 +1,7 @@
 package com.toni.virtualpel.controller;
 
-import com.toni.virtualpel.dto.ApiResponse;
-import com.toni.virtualpel.dto.PetResponse;
+import com.toni.virtualpel.dto.response.ApiResponse;
+import com.toni.virtualpel.dto.response.PetResponse;
 import com.toni.virtualpel.model.User;
 import com.toni.virtualpel.service.AdminService;
 import org.slf4j.LoggerFactory;

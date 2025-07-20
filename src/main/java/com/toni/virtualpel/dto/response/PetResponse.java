@@ -1,4 +1,4 @@
-package com.toni.virtualpel.dto;
+package com.toni.virtualpel.dto.response;
 
 import com.toni.virtualpel.model.Pet;
 import lombok.Data;
