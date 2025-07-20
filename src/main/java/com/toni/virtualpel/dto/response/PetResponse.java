@@ -1,12 +1,14 @@
 package com.toni.virtualpel.dto.response;
 
 import com.toni.virtualpel.model.Pet;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class PetResponse {
     private Long id;
@@ -27,23 +29,25 @@ public class PetResponse {
     private String ownerUsername;
     private String sprite;
 
-    public PetResponse(Pet pet) {
-        this.id = pet.getId();
-        this.name = pet.getName();
-        this.variant = pet.getVariant().name();
-        this.variantDisplayName = pet.getVariant().getDisplayName();
-        this.variantDescription = pet.getVariant().getDescription();
-        this.variantColorName = pet.getVariant().getColorName();
-        this.stage = pet.getStage().name();
-        this.stageDisplayName = pet.getStage().getDisplayName();
-        this.experience = pet.getExperience();
-        this.energy = pet.getEnergy();
-        this.happiness = pet.getHappiness();
-        this.hunger = pet.getHunger();
-        this.createdAt = pet.getCreatedAt();
-        this.lastAction = pet.getLastAction();
-        this.canEvolve = pet.canEvolve();
-        this.ownerUsername = pet.getOwner().getUserName();
-        this.sprite = pet.getSprite();
+    public static PetResponse from(Pet pet) {
+        PetResponse response = new PetResponse();
+        response.id = pet.getId();
+        response.name = pet.getName();
+        response.variant = pet.getVariant().name();
+        response.variantDisplayName = pet.getVariant().getDisplayName();
+        response.variantDescription = pet.getVariant().getDescription();
+        response.variantColorName = pet.getVariant().getColorName();
+        response.stage = pet.getStage().name();
+        response.stageDisplayName = pet.getStage().getDisplayName();
+        response.experience = pet.getExperience();
+        response.energy = pet.getEnergy();
+        response.happiness = pet.getHappiness();
+        response.hunger = pet.getHunger();
+        response.createdAt = pet.getCreatedAt();
+        response.lastAction = pet.getLastAction();
+        response.canEvolve = pet.canEvolve();
+        response.ownerUsername = pet.getOwner().getUsername();
+        response.sprite = pet.getSprite();
+        return response;
     }
 }
