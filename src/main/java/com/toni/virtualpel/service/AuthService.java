@@ -3,11 +3,15 @@ package com.toni.virtualpel.service;
 import com.toni.virtualpel.dto.response.JwtResponse;
 import com.toni.virtualpel.dto.request.LoginRequest;
 import com.toni.virtualpel.dto.request.RegisterRequest;
+import com.toni.virtualpel.exception.UserAlreadyExistsException;
+import com.toni.virtualpel.exception.UserNotFoundException;
 import com.toni.virtualpel.model.User;
+import com.toni.virtualpel.model.enums.Role;
 import com.toni.virtualpel.repository.UserRepository;
 import com.toni.virtualpel.security.JwtUtils;
 import com.toni.virtualpel.security.UserPrincipal;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,8 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.logging.Logger;
 
 @Service
 public class AuthService {
@@ -36,7 +38,7 @@ public class AuthService {
     private JwtUtils jwtUtils;
 
     public JwtResponse login(LoginRequest loginRequest) {
-        logger.info("Loggin try for user: {}" , loginRequest.getUsername());
+        logger.info("Login try for user: {}" , loginRequest.getUsername());
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername() , loginRequest.getPassword())
@@ -45,36 +47,41 @@ public class AuthService {
 
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         User user = userRepository.findByUsername(userPrincipal.getUsername())
-                .orElseThrow(() -> new RuntimeException("Can't find the user"));
+                .orElseThrow(() -> new UserNotFoundException("Can't find the user"));
 
-        String token = jwtUtils.generateToken(userPrincipal.getUserName(), user.getRole().name());
+        String token = jwtUtils.generateToken(userPrincipal.getUsername(), user.getRole().name());
 
-        logger.info("Loggin done: {}", loginRequest.getUsername());
+        logger.info("Login done: {}", loginRequest.getUsername());
 
-        return new JwtResponse(token, user.getId(), user.getUserName(), user.getRole().name());
+        return JwtResponse.builder()
+                .token(token)
+                .id(user.getId())
+                .username(user.getUsername())
+                .role(user.getRole())
+                .build();
     }
 
     public User register(RegisterRequest registerRequest) {
-        logger.info("Registro de nuevo usuario: {} con email: {}",
+        logger.info("New user register: {} with email: {}",
                 registerRequest.getUsername(), registerRequest.getEmail());
 
         if (userRepository.existsByUsername(registerRequest.getUsername())) {
-            throw new RuntimeException("El nombre de usuario ya existe");
+            throw new UserAlreadyExistsException("Username already used");
         }
 
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
-            throw new RuntimeException("El email ya está registrado");
+            throw new UserAlreadyExistsException("Email already used");
         }
 
         User user = new User();
         user.setEmail(registerRequest.getEmail());
-        user.setUserName(registerRequest.getUsername());
+        user.setUsername(registerRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setRole(User.Role.ROLE_USER);
+        user.setRole(Role.ROLE_USER);
 
         User savedUser = userRepository.save(user);
-        logger.info("Usuario registrado exitosamente: {} - {}",
-                savedUser.getUserName(), savedUser.getEmail());
+        logger.info("Registered user: {} - {}",
+                savedUser.getUsername(), savedUser.getEmail());
 
         return savedUser;
     }
