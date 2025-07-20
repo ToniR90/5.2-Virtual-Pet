@@ -46,11 +46,11 @@ public class AuthService {
         User user = userRepository.findByUsername(userPrincipal.getUsername())
                 .orElseThrow(() -> new RuntimeException("Can't find the user"));
 
-        String token = jwtUtils.generateToken(userPrincipal.getUsername(), user.getRole().name());
+        String token = jwtUtils.generateToken(userPrincipal.getUserName(), user.getRole().name());
 
         logger.info("Loggin done: {}", loginRequest.getUsername());
 
-        return new JwtResponse(token, user.getId(), user.getUsername(), user.getRole().name());
+        return new JwtResponse(token, user.getId(), user.getUserName(), user.getRole().name());
     }
 
     public User register(RegisterRequest registerRequest) {
@@ -67,7 +67,7 @@ public class AuthService {
 
         User user = new User();
         user.setEmail(registerRequest.getEmail());
-        user.setUsername(registerRequest.getUsername());
+        user.setUserName(registerRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setRole(User.Role.ROLE_USER);
 
