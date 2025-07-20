@@ -20,7 +20,7 @@ public abstract class AuditableEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "lastAction")
+    @Column(name = "last_action")
     private LocalDateTime lastAction;
 
 }
