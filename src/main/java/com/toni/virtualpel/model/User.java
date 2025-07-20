@@ -9,7 +9,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @Getter
@@ -38,6 +37,7 @@ public class User extends AuditableEntity {
     @NotBlank
     @Column(name = "password", nullable = false)
     @Size(min = 6 , message = "Password minimum length is 6 chars")
+    @ToString.Exclude
     private String password;
 
     @NotNull(message = "User role must be specified")

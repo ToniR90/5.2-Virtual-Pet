@@ -1,19 +1,19 @@
 package com.toni.virtualpel.model;
 
+import com.toni.virtualpel.model.base.AuditableEntity;
 import com.toni.virtualpel.model.enums.ActionType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "pet_action")
-public class PetAction {
+public class PetAction extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +22,6 @@ public class PetAction {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ActionType actionType;
-
-    @Column(name = "performed_at" , nullable = false)
-    private LocalDateTime performedAt;
 
     @Column(name = "experience_gained")
     private Integer experienceGained = 1;
@@ -39,21 +36,21 @@ public class PetAction {
 
     @PrePersist
     protected void onCreate() {
-        if (performedAt == null) {
-            performedAt = LocalDateTime.now();
-        }
         if (experienceGained == null) {
             experienceGained = actionType.getExperienceReward();
         }
+        if (pet != null && user != null && !pet.getOwner().equals(user)) {
+            throw new IllegalStateException("User must be the owner of the pet");
+        }
     }
-
 
     @Override
     public String toString() {
-        return "Pet Action: " +
+        return "PetAction: " +
                 "Id: " + id + "\n" +
                 "Action Type: " + actionType + "\n" +
                 "Experience Gained: " + experienceGained + "\n" +
+                "Pet: " + pet + "\n" +
                 "User: " + user;
     }
 }

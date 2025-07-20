@@ -95,12 +95,12 @@ public class PetService {
             case IGNORE -> pet.ignore();
         }
 
-        Pet savedPet = petRepository.save(pet);
+        /*Pet savedPet = petRepository.save(pet);
         PetAction action = new PetAction(actionType, savedPet, currentUser);
         petActionRepository.save(action);
 
         logger.info("Action '{}' done. Pet updated: {}", actionName, savedPet);
-        return new PetResponse(savedPet);
+        return new PetResponse(savedPet);*/
     }
 
     public PetResponse evolvePet(Long petId) {
@@ -119,11 +119,11 @@ public class PetService {
 
         Pet savedPet = petRepository.save(pet);
 
-        PetAction action = new PetAction(ActionType.EVOLVE, savedPet, currentUser);
+        /*PetAction action = new PetAction(ActionType.EVOLVE, savedPet, currentUser);
         petActionRepository.save(action);
 
         logger.info("Pet evolved from {} to {}", oldStage, savedPet.getStage());
-        return new PetResponse(savedPet);
+        return new PetResponse(savedPet);*/
     }
 
     public void deletePet(Long petId) {
