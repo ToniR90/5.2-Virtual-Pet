@@ -6,6 +6,7 @@ import com.toni.virtualpel.dto.RegisterRequest;
 import com.toni.virtualpel.model.User;
 import com.toni.virtualpel.repository.UserRepository;
 import com.toni.virtualpel.security.JwtUtils;
+import com.toni.virtualpel.security.UserPrincipal;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,7 +43,7 @@ public class AuthService {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        UserDetailsServiceImpl.UserPrincipal userPrincipal = (UserDetailsServiceImpl.UserPrincipal) authentication.getPrincipal();
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         User user = userRepository.findByUsername(userPrincipal.getUsername())
                 .orElseThrow(() -> new RuntimeException("Can't find the user"));
 
@@ -73,7 +74,7 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
         logger.info("Usuario registrado exitosamente: {} - {}",
-                savedUser.getUsername(), savedUser.getEmail());
+                savedUser.getUserName(), savedUser.getEmail());
 
         return savedUser;
     }
