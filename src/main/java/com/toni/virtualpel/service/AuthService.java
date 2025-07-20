@@ -5,6 +5,7 @@ import com.toni.virtualpel.dto.LoginRequest;
 import com.toni.virtualpel.dto.RegisterRequest;
 import com.toni.virtualpel.model.User;
 import com.toni.virtualpel.repository.UserRepository;
+import com.toni.virtualpel.security.JwtUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

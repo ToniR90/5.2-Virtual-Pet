@@ -33,6 +33,7 @@ public class PetService {
     private PetActionRepository petActionRepository;
 
 
+
     private User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByUsername(username)
