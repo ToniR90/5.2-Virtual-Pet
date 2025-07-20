@@ -20,7 +20,7 @@ public class RegisterRequest {
     @Size(min = 3 , max = 20 , message = "Name must be between 3 - 20 chars long")
     private String username;
 
-    @NotBlank(message = "Password cant' be empty")
+    @NotBlank(message = "Password can't be empty")
     @Size(min = 6 , message = "Min size: 6 chars")
     private String password;
 
