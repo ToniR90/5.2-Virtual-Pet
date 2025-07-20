@@ -17,9 +17,6 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
     List<Pet> findByOwnerId(Long ownerId);
     List<Pet> findByIdAndOwner(Long id , User owner);
 
-    @Query("SELECT p FROM Pet p WHERE p.owner.id = :ownerId")
-    List<Pet> findPetsByOwnerId(@Param("ownerId") Long ownerId);
-
     @Query("SELECT COUNT(p) FROM Pet p WHERE p.owner.id = :ownerId")
     long countPetsByOwnerId(@Param("ownerId") Long ownerId);
 
