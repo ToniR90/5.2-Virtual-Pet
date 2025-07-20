@@ -17,15 +17,15 @@ public interface PetActionRepository extends JpaRepository<PetAction , Long> {
     List<PetAction> findByPet(Pet pet);
     List<PetAction> findByPetId(Long petId);
     List<PetAction> findByUser(User user);
-    List<PetAction> findByPetOrderByPerformedAtDesc(Pet pet);
+    List<PetAction> findByPetOrderByCreatedAtDesc(Pet pet);
     List<PetAction> findByActionType(ActionType actionType);
 
-    @Query("SELECT pa FROM PetAction pa WHERE pa.pet.id = :petId AND pa.performedAt >= :since ORDER BY pa.performedAt DESC")
+    @Query("SELECT pa FROM PetAction pa WHERE pa.pet.id = :petId AND pa.createdAt >= :since ORDER BY pa.createdAt DESC")
     List<PetAction> findRecentActionsByPet(@Param("petId") Long petId, @Param("since") LocalDateTime since);
 
     @Query("SELECT COUNT(pa) FROM PetAction pa WHERE pa.pet.id = :petId AND pa.actionType = :actionType")
     long countActionsByPetAndType(@Param("petId") Long petId, @Param("actionType") ActionType actionType);
 
-    @Query("SELECT pa FROM PetAction pa WHERE pa.user.id = :userId ORDER BY pa.performedAt DESC")
+    @Query("SELECT pa FROM PetAction pa WHERE pa.user.id = :userId ORDER BY pa.createdAt DESC")
     List<PetAction> findActionsByUserOrderByDate(@Param("userId") Long userId);
 }
