@@ -2,6 +2,7 @@ package com.toni.virtualpet.service;
 
 import com.toni.virtualpet.dto.request.CreatePetRequest;
 import com.toni.virtualpet.dto.response.PetResponse;
+import com.toni.virtualpet.exception.PetActionException;
 import com.toni.virtualpet.exception.PetNotFoundException;
 import com.toni.virtualpet.exception.UserNotFoundException;
 import com.toni.virtualpet.model.Pet;
@@ -129,7 +130,7 @@ public class PetService {
                 .orElseThrow(() -> new PetNotFoundException("Pet not found"));
 
         if (!pet.canEvolve()) {
-            throw new RuntimeException("Pet can't evolve yet");
+            throw PetActionException.cannotEvolve(pet.getName());
         }
 
         logger.info("Evolving Pet '{}' from user: {}", pet.getName(), currentUser.getUsername());
