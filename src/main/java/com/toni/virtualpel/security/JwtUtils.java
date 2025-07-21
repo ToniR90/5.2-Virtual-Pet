@@ -2,7 +2,7 @@ package com.toni.virtualpel.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${app.jwtSecret:,ySecretKey}")
+    @Value("${app.jwtSecret:mySecretKey}")
     private String jwtSecret;
 
     @Value("${app.jwtExpirationMs:86400000}")
