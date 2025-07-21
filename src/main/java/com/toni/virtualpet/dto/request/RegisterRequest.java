@@ -1,6 +1,7 @@
 package com.toni.virtualpet.dto.request;
 
 
+import com.toni.virtualpet.model.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,4 +25,5 @@ public class RegisterRequest {
     @Size(min = 6 , message = "Min size: 6 chars")
     private String password;
 
+    private Role role = Role.ROLE_USER;
 }
