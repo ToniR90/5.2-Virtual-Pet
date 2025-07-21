@@ -16,4 +16,13 @@ public class JwtResponse {
     private Long id;
     private String username;
     private Role role;
+
+    public JwtResponse(String token, Long id, String username, Role role) {
+        this.token = token;
+        this.type = "Bearer";
+        this.id = id;
+        this.username = username;
+        this.role = role;
+    }
+
 }

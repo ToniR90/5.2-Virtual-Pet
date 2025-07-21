@@ -5,6 +5,7 @@ import com.toni.virtualpet.model.enums.Stage;
 import com.toni.virtualpet.model.enums.Variant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -29,7 +30,7 @@ public class Pet extends AuditableEntity {
     @Size(min = 1 , max = 20 , message = "Pet name must be 1- 20 chars long")
     private String name;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Variant variant;
