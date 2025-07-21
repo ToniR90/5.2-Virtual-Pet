@@ -27,13 +27,27 @@
         /* === LOGIN/REGISTER SCREEN === */
         .login-screen {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-end;
+            justify-content: flex-start;
             min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+        }
+
+        .background-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 80%;
             background-image: url('images/background.png');
-            background-size: cover;
+            background-size: contain;
             background-position: center;
-            background-attachment: fixed;
+            background-repeat: no-repeat;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         .login-card {
@@ -513,6 +527,7 @@
 <body>
 <!-- LOGIN/REGISTER SCREEN -->
 <div id="loginScreen" class="login-screen">
+    <div class="background-frame"></div>
     <div class="login-card">
         <h1>🐲 Virtual Pet</h1>
 
