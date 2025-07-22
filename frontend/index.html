@@ -521,18 +521,18 @@
         <div id="loginForm">
             <div class="form-group">
                 <label for="loginUsername">Usuario</label>
-                <input type="text" id="loginUsername" placeholder="Introduce tu usuario">
+                <input type="text" id="loginUsername" placeholder="Insert your username">
             </div>
             <div class="form-group">
                 <label for="loginPassword">Contraseña</label>
-                <input type="password" id="loginPassword" placeholder="Introduce tu contraseña">
+                <input type="password" id="loginPassword" placeholder="Insert your password">
             </div>
             <button class="btn" onclick="login()">
-                <span class="btn-text">Iniciar Sesión</span>
+                <span class="btn-text">Login</span>
                 <span class="loading" style="display: none;"></span>
             </button>
             <button class="btn btn-secondary" onclick="showRegister()">
-                ¿No tienes cuenta? Regístrate
+                ¿Don't have an account? Create one
             </button>
         </div>
 
@@ -540,22 +540,22 @@
         <div id="registerForm" style="display: none;">
             <div class="form-group">
                 <label for="registerUsername">Usuario</label>
-                <input type="text" id="registerUsername" placeholder="Elige un nombre de usuario">
+                <input type="text" id="registerUsername" placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="registerEmail">Email</label>
-                <input type="email" id="registerEmail" placeholder="tu@email.com">
+                <input type="email" id="registerEmail" placeholder="your@email.com">
             </div>
             <div class="form-group">
                 <label for="registerPassword">Contraseña</label>
-                <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres">
+                <input type="password" id="registerPassword" placeholder="6 chars min">
             </div>
             <button class="btn" onclick="register()">
                 <span class="btn-text">Crear Cuenta</span>
                 <span class="loading" style="display: none;"></span>
             </button>
             <button class="btn btn-secondary" onclick="showLogin()">
-                ¿Ya tienes cuenta? Inicia sesión
+                ¿Have an account? Login
             </button>
         </div>
     </div>
@@ -565,10 +565,10 @@
 <div id="dashboardScreen" class="dashboard">
     <div class="container">
         <div class="dashboard-header">
-            <h1>Mis Mascotas</h1>
+            <h1>My pets</h1>
             <div class="user-info">
-                <span id="welcomeUser">¡Hola, Usuario!</span>
-                <button class="btn btn-secondary" onclick="logout()">Cerrar Sesión</button>
+                <span id="welcomeUser">¡Welcome, User!</span>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
             </div>
         </div>
 
@@ -576,8 +576,8 @@
             <!-- Create New Pet Card -->
             <div class="pet-card create-pet-card" onclick="showCreatePetModal()">
                 <div class="create-icon">+</div>
-                <h3>Crear Nueva Mascota</h3>
-                <p>¡Comienza tu aventura!</p>
+                <h3>Create new pet</h3>
+                <p>¡Start your adventure!</p>
             </div>
 
             <!-- Pet cards will be loaded here -->
@@ -590,21 +590,21 @@
     <div class="container">
         <div class="pet-detail-card">
             <div class="pet-detail-header">
-                <button class="back-btn" onclick="showDashboard()">← Volver</button>
-                <h2>Detalles de Mascota</h2>
+                <button class="back-btn" onclick="showDashboard()">← Back</button>
+                <h2>Pet details</h2>
             </div>
 
             <div class="pet-detail-image" id="petDetailImage">
                 <img src="images/pets/dragon-mountain-egg.png" alt="Pet" id="petDetailImg">
             </div>
 
-            <h2 class="pet-name" id="petDetailName">Nombre de Mascota</h2>
-            <p class="pet-stage" id="petDetailStage">Etapa • Variante</p>
+            <h2 class="pet-name" id="petDetailName">Pet's name</h2>
+            <p class="pet-stage" id="petDetailStage">Stage • Variant</p>
 
             <div class="stats-container">
                 <div class="stat-bar stat-energy">
                     <div class="stat-label">
-                        <span>⚡ Energía</span>
+                        <span>⚡ Energy</span>
                         <span id="energyValue">50/100</span>
                     </div>
                     <div class="stat-progress">
@@ -614,7 +614,7 @@
 
                 <div class="stat-bar stat-happiness">
                     <div class="stat-label">
-                        <span>😊 Felicidad</span>
+                        <span>😊 Happiness</span>
                         <span id="happinessValue">50/100</span>
                     </div>
                     <div class="stat-progress">
@@ -624,7 +624,7 @@
 
                 <div class="stat-bar stat-hunger">
                     <div class="stat-label">
-                        <span>🍖 Hambre</span>
+                        <span>🍖 Hunger</span>
                         <span id="hungerValue">50/100</span>
                     </div>
                     <div class="stat-progress">
@@ -634,8 +634,8 @@
 
                 <div class="stat-bar stat-experience">
                     <div class="stat-label">
-                        <span>⭐ Experiencia</span>
-                        <span id="experienceValue">0/100</span>
+                        <span>⭐ Experience</span>
+                        <span id="experienceValue">0/10</span>
                     </div>
                     <div class="stat-progress">
                         <div class="stat-fill" id="experienceBar" style="width: 0%"></div>
@@ -645,19 +645,19 @@
 
             <div class="actions-container">
                 <button class="action-btn btn-feed" onclick="performAction('feed')">
-                    🍖 Alimentar
+                    🍖 Feed
                 </button>
                 <button class="action-btn btn-play" onclick="performAction('play')">
-                    🎾 Jugar
+                    🎾 Play
                 </button>
                 <button class="action-btn btn-rest" onclick="performAction('rest')">
-                    💤 Descansar
+                    💤 Rest
                 </button>
                 <button class="action-btn btn-ignore" onclick="performAction('ignore')">
-                    🚫 Ignorar
+                    🚫 Ignore
                 </button>
                 <button class="action-btn btn-evolve" id="evolveBtn" onclick="performAction('evolve')" disabled>
-                    ✨ ¡EVOLUCIONAR!
+                    ✨ ¡EVOLVE!
                 </button>
             </div>
         </div>
@@ -667,36 +667,36 @@
 <!-- CREATE PET MODAL -->
 <div id="createPetModal" class="modal">
     <div class="modal-content">
-        <h2>Crear Nueva Mascota</h2>
+        <h2>Create new pet</h2>
 
         <div class="form-group">
-            <label for="petName">Nombre de tu mascota</label>
+            <label for="petName">Pet's name</label>
             <input type="text" id="petName" placeholder="Ej: Draco, Aqua, Terra...">
         </div>
 
-        <h3>Elige una variante:</h3>
+        <h3>Choose a variant:</h3>
         <div class="variant-grid">
             <div class="variant-option" onclick="selectVariant('MOUNTAIN')">
                 <img src="images/pets/dragon-mountain-egg.png" alt="Mountain Dragon">
-                <p>Montaña</p>
+                <p>Mountain</p>
             </div>
             <div class="variant-option" onclick="selectVariant('SWAMP')">
                 <img src="images/pets/dragon-swamp-egg.png" alt="Swamp Dragon">
-                <p>Pantano</p>
+                <p>Swamp</p>
             </div>
             <div class="variant-option" onclick="selectVariant('FOREST')">
                 <img src="images/pets/dragon-forest-egg.png" alt="Forest Dragon">
-                <p>Bosque</p>
+                <p>Forest</p>
             </div>
         </div>
 
         <div style="display: flex; gap: 10px; margin-top: 30px;">
             <button class="btn" onclick="createPet()" id="createPetBtn" disabled>
-                <span class="btn-text">Crear Mascota</span>
+                <span class="btn-text">Create pet</span>
                 <span class="loading" style="display: none;"></span>
             </button>
             <button class="btn btn-secondary" onclick="closeCreatePetModal()">
-                Cancelar
+                Cancel
             </button>
         </div>
     </div>
@@ -791,7 +791,7 @@
         const password = document.getElementById('loginPassword').value;
 
         if (!username || !password) {
-            showNotification('Por favor, completa todos los campos', true);
+            showNotification('Please, insert username and password', true);
             return;
         }
 
@@ -806,7 +806,7 @@
             currentUser = response.data;
             localStorage.setItem('virtualPetUser', JSON.stringify(currentUser));
 
-            showNotification('¡Bienvenido de vuelta!');
+            showNotification('¡Welcome back!');
             showDashboard();
         } catch (error) {
             showNotification(error.message, true);
@@ -821,12 +821,12 @@
         const password = document.getElementById('registerPassword').value;
 
         if (!username || !email || !password) {
-            showNotification('Por favor, completa todos los campos', true);
+            showNotification('Please, complete all fields', true);
             return;
         }
 
         if (password.length < 6) {
-            showNotification('La contraseña debe tener al menos 6 caracteres', true);
+            showNotification('Password must be 6 chars min', true);
             return;
         }
 
@@ -839,7 +839,7 @@
                 password
             });
 
-            showNotification('¡Cuenta creada! Ahora puedes iniciar sesión');
+            showNotification('¡Account created! You can login');
             showLogin();
         } catch (error) {
             showNotification(error.message, true);
@@ -852,7 +852,7 @@
         currentUser = null;
         localStorage.removeItem('virtualPetUser');
         showLoginScreen();
-        showNotification('Sesión cerrada');
+        showNotification('Logout');
     }
 
     // === SCREEN FUNCTIONS ===
@@ -868,7 +868,7 @@
         document.getElementById('petDetailScreen').classList.remove('active');
 
         if (currentUser) {
-            document.getElementById('welcomeUser').textContent = `¡Hola, ${currentUser.username}!`;
+            document.getElementById('welcomeUser').textContent = `¡Hi, ${currentUser.username}!`;
             loadUserPets();
         }
     }
@@ -889,7 +889,7 @@
 
             displayPets(pets);
         } catch (error) {
-            showNotification('Error al cargar las mascotas', true);
+            showNotification('Cannot load pet list', true);
         }
     }
 
@@ -963,10 +963,10 @@
         evolveBtn.disabled = !canEvolve;
 
         if (canEvolve) {
-            evolveBtn.textContent = '✨ ¡EVOLUCIONAR DISPONIBLE!';
+            evolveBtn.textContent = '✨ ¡EVOLUTION AVAILABLE!';
             evolveBtn.style.animation = 'pulse 2s infinite';
         } else {
-            evolveBtn.textContent = '✨ Evolucionar (No disponible)';
+            evolveBtn.textContent = '✨ Evolve (No disponible)';
             evolveBtn.style.animation = 'none';
         }
     }
@@ -1001,7 +1001,7 @@
 
         try {
             actionButton.disabled = true;
-            actionButton.textContent = '⏳ Procesando...';
+            actionButton.textContent = '⏳ Processing...';
 
             const response = await apiCall(`/pets/${currentPet.id}/${action}`, 'POST');
             const updatedPet = response.data;
@@ -1012,19 +1012,19 @@
 
             // Show success message
             const messages = {
-                feed: '🍖 ¡Tu mascota ha comido y está más feliz!',
-                play: '🎾 ¡Habéis jugado juntos! Diversión garantizada.',
-                rest: '💤 Tu mascota ha descansado y recuperado energía.',
-                ignore: '😔 Has ignorado a tu mascota...',
-                evolve: '✨ ¡INCREÍBLE! ¡Tu mascota ha evolucionado!'
+                feed: '🍖 ¡Your pet has eaten and is happier!',
+                play: '🎾 ¡You have played together! Guaranteed fun.',
+                rest: '💤 Your pet has rested and regained energy.',
+                ignore: '😔 You have ignored your pet...',
+                evolve: '✨ INCREDIBLE! Your pet has evolved!'
             };
 
-            showNotification(messages[action] || '✅ Acción completada');
+            showNotification(messages[action] || '✅ Action complete');
 
             // Special handling for evolution
             if (action === 'evolve') {
                 setTimeout(() => {
-                    showNotification(`🎉 ¡${currentPet.name} ahora es ${currentPet.stage}!`);
+                    showNotification(`🎉 ¡${currentPet.name} now is ${currentPet.stage}!`);
                 }, 1500);
             }
 
@@ -1096,7 +1096,7 @@
                 variant: selectedVariant
             });
 
-            showNotification(`¡${petName} ha nacido! 🥚✨`);
+            showNotification(`¡${petName} has borne! 🥚✨`);
             closeCreatePetModal();
             loadUserPets(); // Refresh pets list
 
@@ -1181,11 +1181,11 @@
 
             // Show need notifications
             if (currentPet.energy < 20) {
-                showNotification('⚡ Tu mascota está cansada', true);
+                showNotification('⚡ Your pet is tired', true);
             } else if (currentPet.happiness < 30) {
-                showNotification('😢 Tu mascota se siente triste', true);
+                showNotification('😢 Your pet is sad', true);
             } else if (currentPet.hunger > 80) {
-                showNotification('🍖 Tu mascota tiene hambre', true);
+                showNotification('🍖 Your pet wants to eat', true);
             }
         }
     }
