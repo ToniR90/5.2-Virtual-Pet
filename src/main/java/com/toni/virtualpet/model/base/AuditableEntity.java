@@ -2,13 +2,15 @@ package com.toni.virtualpet.model.base;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class AuditableEntity {
 
@@ -22,5 +24,4 @@ public abstract class AuditableEntity {
 
     @Column(name = "last_action")
     private LocalDateTime lastAction;
-
 }
