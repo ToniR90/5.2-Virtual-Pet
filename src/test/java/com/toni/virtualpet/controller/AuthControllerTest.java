@@ -7,7 +7,7 @@ import com.toni.virtualpet.dto.response.JwtResponse;
 import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.model.user.enums.Role;
-import com.toni.virtualpet.service.AuthService;
+import com.toni.virtualpet.service.user.AuthService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

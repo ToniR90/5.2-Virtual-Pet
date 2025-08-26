@@ -13,7 +13,9 @@ import com.toni.virtualpet.model.pet.enums.Stage;
 import com.toni.virtualpet.repository.PetActionRepository;
 import com.toni.virtualpet.repository.PetRepository;
 import com.toni.virtualpet.repository.UserRepository;
+import com.toni.virtualpet.service.user.UserService;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class PetService {
 
     private static final Logger logger = LoggerFactory.getLogger(PetService.class);
@@ -32,14 +35,17 @@ public class PetService {
     @Autowired
     private PetRepository petRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    /*@Autowired
+    private UserRepository userRepository;*/
 
     @Autowired
     private PetActionRepository petActionRepository;
 
+    @Autowired
+    private UserService userService;
+
     public PetResponse createPet(CreatePetRequest request) {
-        User currentUser = getCurrentUser();
+        User currentUser = userService.getCurrentUser();
         logger.info("Creating Pet '{}' variant {} for user: {}" , request.getName() , request.getVariant() , currentUser.getUsername());
 
         Pet pet = Pet.builder()
@@ -59,7 +65,7 @@ public class PetService {
     }
 
     public List<PetResponse> getUserPets() {
-        User currentUser = getCurrentUser();
+        User currentUser = userService.getCurrentUser();
         logger.info("Getting pets from user: {}" , currentUser.getUsername());
 
         List<Pet> pets = petRepository.findByOwner(currentUser);
@@ -69,7 +75,7 @@ public class PetService {
     }
 
     public PetResponse getPetById(Long petId) {
-        User currentUser = getCurrentUser();
+        User currentUser = userService.getCurrentUser();
         Pet pet = petRepository.findByIdAndOwner(petId, currentUser)
                 .stream()
                 .findFirst()
@@ -78,7 +84,19 @@ public class PetService {
         return PetResponse.from(pet);
     }
 
-    public PetResponse feedPet(Long petId) {
+    public void deletePet(Long petId) {
+        User currentUser = userService.getCurrentUser();
+        Pet pet = petRepository.findByIdAndOwner(petId, currentUser)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new PetNotFoundException("Pet not found"));
+
+        logger.info("Deleting pet '{}' from user: {}", pet.getName(), currentUser.getUsername());
+        petRepository.delete(pet);
+    }
+
+
+    /*public PetResponse feedPet(Long petId) {
         return performAction(petId, ActionType.FEED, "feed");
     }
 
@@ -95,7 +113,7 @@ public class PetService {
     }
 
     private PetResponse performAction(Long petId , ActionType actionType , String actionName) {
-        User currentUser = getCurrentUser();
+        User currentUser = userService.getCurrentUser();
         Pet pet = petRepository.findByIdAndOwner(petId, currentUser)
                 .stream()
                 .findFirst()
@@ -123,7 +141,7 @@ public class PetService {
     }
 
     public PetResponse evolvePet(Long petId) {
-        User currentUser = getCurrentUser();
+        User currentUser = userService.getCurrentUser();
         Pet pet = petRepository.findByIdAndOwner(petId, currentUser)
                 .stream()
                 .findFirst()
@@ -149,22 +167,13 @@ public class PetService {
 
         logger.info("Pet evolved from {} to {}", oldStage, savedPet.getStage());
         return PetResponse.from(savedPet);
-    }
+    }*/
 
-    public void deletePet(Long petId) {
-        User currentUser = getCurrentUser();
-        Pet pet = petRepository.findByIdAndOwner(petId, currentUser)
-                .stream()
-                .findFirst()
-                .orElseThrow(() -> new PetNotFoundException("Pet not found"));
 
-        logger.info("Deleting pet '{}' from user: {}", pet.getName(), currentUser.getUsername());
-        petRepository.delete(pet);
-    }
 
-    private User getCurrentUser() {
+    /*private User getCurrentUser() { MOGUT A USERSERVICE
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
-    }
+    }*/
 }

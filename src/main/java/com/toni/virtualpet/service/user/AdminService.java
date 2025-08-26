@@ -1,4 +1,4 @@
-package com.toni.virtualpet.service;
+package com.toni.virtualpet.service.user;
 
 import com.toni.virtualpet.dto.response.PetResponse;
 import com.toni.virtualpet.exception.personalizedException.PetNotFoundException;

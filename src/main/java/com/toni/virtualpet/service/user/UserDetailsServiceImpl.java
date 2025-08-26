@@ -1,4 +1,4 @@
-package com.toni.virtualpet.service;
+package com.toni.virtualpet.service.user;
 
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.repository.UserRepository;

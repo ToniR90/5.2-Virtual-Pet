@@ -1,4 +1,4 @@
-package com.toni.virtualpet.service;
+package com.toni.virtualpet.service.user;
 
 import com.toni.virtualpet.dto.response.JwtResponse;
 import com.toni.virtualpet.dto.request.LoginRequest;

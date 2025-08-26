@@ -1,6 +1,6 @@
 package com.toni.virtualpet.security;
 
-import com.toni.virtualpet.service.UserDetailsServiceImpl;
+import com.toni.virtualpet.service.user.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

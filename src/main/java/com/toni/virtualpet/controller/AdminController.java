@@ -6,7 +6,7 @@ import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.model.pet.enums.Stage;
 import com.toni.virtualpet.model.pet.enums.Variant;
-import com.toni.virtualpet.service.AdminService;
+import com.toni.virtualpet.service.user.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
