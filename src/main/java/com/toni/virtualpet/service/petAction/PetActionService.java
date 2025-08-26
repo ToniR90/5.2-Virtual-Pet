@@ -1,15 +1,25 @@
 package com.toni.virtualpet.service.petAction;
 
+import com.toni.virtualpet.exception.personalizedException.PetActionException;
+import com.toni.virtualpet.model.pet.Pet;
+import com.toni.virtualpet.model.petAction.PetAction;
+import com.toni.virtualpet.model.petAction.enums.ActionType;
+import com.toni.virtualpet.model.user.User;
+import com.toni.virtualpet.repository.PetActionRepository;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+
+@Service
+@Transactional
+@AllArgsConstructor
 public class PetActionService {
-}
 
-/*@Service
-public class PetActionService {
+    private final PetActionRepository petActionRepository;
 
-    @Autowired
-    private PetActionRepository petActionRepository;
-
-    public void applyAction(Pet pet, User user, ActionType actionType) {
+    public Pet applyAction(Pet pet, User user, ActionType actionType) {
         switch (actionType) {
             case FEED -> {
                 pet.setHunger(Math.min(100, pet.getHunger() + 20));
@@ -30,17 +40,26 @@ public class PetActionService {
                 pet.setEnergy(Math.max(0, pet.getEnergy() - 5));
                 pet.setHunger(Math.max(0, pet.getHunger() - 5));
             }
+            case EVOLVE -> {
+                if (!pet.canEvolve()) {
+                    throw PetActionException.cannotEvolve(pet.getName());
+                }
+                pet.evolve();
+            }
         }
 
         pet.setLastAction(LocalDateTime.now());
         pet.addExperience(actionType.getExperienceReward());
 
-        PetAction action = new PetAction();
-        action.setActionType(actionType);
-        action.setPet(pet);
-        action.setUser(user);
-        action.setExperienceGained(actionType.getExperienceReward());
+        PetAction action = PetAction.builder()
+                .actionType(actionType)
+                .pet(pet)
+                .user(user)
+                .experienceGained(actionType.getExperienceReward())
+                .build();
 
         petActionRepository.save(action);
+        return pet;
     }
-}*/
+
+}

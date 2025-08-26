@@ -10,6 +10,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "pet_action")
