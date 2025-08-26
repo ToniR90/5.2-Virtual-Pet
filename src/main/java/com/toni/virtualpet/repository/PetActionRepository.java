@@ -27,5 +27,5 @@ public interface PetActionRepository extends JpaRepository<PetAction , Long> {
     long countActionsByPetAndType(@Param("petId") Long petId, @Param("actionType") ActionType actionType);
 
     @Query("SELECT pa FROM PetAction pa WHERE pa.user.id = :userId ORDER BY pa.createdAt DESC")
-    List<PetAction> findActionsByUserOrderByDate(@Param("userId") Long userId);
+    List<PetAction> findByUserIdOrderByCreatedAtDesc(@Param("userId") Long userId);
 }
