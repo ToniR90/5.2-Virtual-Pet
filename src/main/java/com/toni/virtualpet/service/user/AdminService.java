@@ -9,6 +9,7 @@ import com.toni.virtualpet.model.pet.enums.Stage;
 import com.toni.virtualpet.model.pet.enums.Variant;
 import com.toni.virtualpet.repository.PetRepository;
 import com.toni.virtualpet.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class AdminService {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminService.class);
 
-    @Autowired
     private PetRepository petRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
     public List<PetResponse> getAllPets() {
         logger.info("Admin getting all pets from system");
 
@@ -39,13 +37,11 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAllUsers() {
         logger.info("Admin getting all users from system");
         return userRepository.findAll();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public PetResponse getPetById(Long petId) {
         logger.info("Admin getting pet by ID: {}", petId);
 
@@ -55,7 +51,6 @@ public class AdminService {
         return PetResponse.from(pet);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public void deletePetById(Long petId) {
         logger.info("Admin deleting pet by ID: {}", petId);
 
@@ -66,7 +61,6 @@ public class AdminService {
         logger.info("Pet deleted by admin: {}", pet.getName());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public List<PetResponse> getPetsByUser(Long userId) {
         logger.info("Admin getting pets from user's ID: {}", userId);
 
@@ -79,7 +73,6 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public List<PetResponse> getPetsByVariant(Variant variant) {
         logger.info("Admin getting pets by variant: {}", variant);
 
@@ -89,7 +82,6 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     public List<PetResponse> getPetsByStage(Stage stage) {
         logger.info("Admin getting pets by stage: {}", stage);
 
