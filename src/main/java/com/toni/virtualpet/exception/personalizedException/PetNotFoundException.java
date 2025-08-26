@@ -1,4 +1,4 @@
-package com.toni.virtualpet.exception;
+package com.toni.virtualpet.exception.personalizedException;
 
 public class PetNotFoundException extends VirtualPetException {
     public PetNotFoundException(String message) {

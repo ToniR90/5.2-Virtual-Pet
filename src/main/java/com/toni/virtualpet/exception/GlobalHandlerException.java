@@ -1,6 +1,7 @@
 package com.toni.virtualpet.exception;
 
 import com.toni.virtualpet.dto.response.ApiResponse;
+import com.toni.virtualpet.exception.personalizedException.*;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

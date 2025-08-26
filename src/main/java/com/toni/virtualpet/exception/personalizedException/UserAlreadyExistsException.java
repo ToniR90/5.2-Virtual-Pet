@@ -1,4 +1,4 @@
-package com.toni.virtualpet.exception;
+package com.toni.virtualpet.exception.personalizedException;
 
 public class UserAlreadyExistsException extends VirtualPetException {
     public UserAlreadyExistsException(String message) {

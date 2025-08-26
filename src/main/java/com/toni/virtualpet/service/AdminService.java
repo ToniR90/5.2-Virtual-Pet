@@ -1,8 +1,8 @@
 package com.toni.virtualpet.service;
 
 import com.toni.virtualpet.dto.response.PetResponse;
-import com.toni.virtualpet.exception.PetNotFoundException;
-import com.toni.virtualpet.exception.UserNotFoundException;
+import com.toni.virtualpet.exception.personalizedException.PetNotFoundException;
+import com.toni.virtualpet.exception.personalizedException.UserNotFoundException;
 import com.toni.virtualpet.model.pet.Pet;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.model.pet.enums.Stage;
