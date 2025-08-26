@@ -1,4 +1,4 @@
-package com.toni.virtualpet.model.enums;
+package com.toni.virtualpet.model.user.enums;
 
 public enum Role {
     ROLE_USER , ROLE_ADMIN

@@ -1,7 +1,7 @@
 package com.toni.virtualpet.dto.response;
 
-import com.toni.virtualpet.model.User;
-import com.toni.virtualpet.model.enums.Role;
+import com.toni.virtualpet.model.user.User;
+import com.toni.virtualpet.model.user.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

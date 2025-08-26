@@ -1,4 +1,4 @@
-package com.toni.virtualpet.model.base;
+package com.toni.virtualpet.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

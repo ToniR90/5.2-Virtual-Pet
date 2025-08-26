@@ -1,4 +1,4 @@
-package com.toni.virtualpet.model.enums;
+package com.toni.virtualpet.model.pet.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

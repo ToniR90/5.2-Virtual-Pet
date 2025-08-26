@@ -1,7 +1,7 @@
 package com.toni.virtualpet.dto.request;
 
 
-import com.toni.virtualpet.model.enums.Role;
+import com.toni.virtualpet.model.user.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

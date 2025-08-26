@@ -1,7 +1,8 @@
-package com.toni.virtualpet.model;
+package com.toni.virtualpet.model.user;
 
-import com.toni.virtualpet.model.base.AuditableEntity;
-import com.toni.virtualpet.model.enums.Role;
+import com.toni.virtualpet.model.AuditableEntity;
+import com.toni.virtualpet.model.user.enums.Role;
+import com.toni.virtualpet.model.pet.Pet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

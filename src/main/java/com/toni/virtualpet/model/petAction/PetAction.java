@@ -1,7 +1,9 @@
-package com.toni.virtualpet.model;
+package com.toni.virtualpet.model.petAction;
 
-import com.toni.virtualpet.model.base.AuditableEntity;
-import com.toni.virtualpet.model.enums.ActionType;
+import com.toni.virtualpet.model.AuditableEntity;
+import com.toni.virtualpet.model.petAction.enums.ActionType;
+import com.toni.virtualpet.model.pet.Pet;
+import com.toni.virtualpet.model.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

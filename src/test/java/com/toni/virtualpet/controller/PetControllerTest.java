@@ -3,7 +3,7 @@ package com.toni.virtualpet.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toni.virtualpet.dto.request.CreatePetRequest;
 import com.toni.virtualpet.dto.response.PetResponse;
-import com.toni.virtualpet.model.enums.Variant;
+import com.toni.virtualpet.model.pet.enums.Variant;
 import com.toni.virtualpet.security.JwtRequestFilter;
 import com.toni.virtualpet.security.JwtUtils;
 import com.toni.virtualpet.service.PetService;

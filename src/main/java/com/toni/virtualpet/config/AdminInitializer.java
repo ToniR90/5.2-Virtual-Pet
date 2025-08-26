@@ -1,7 +1,7 @@
 package com.toni.virtualpet.config;
 
-import com.toni.virtualpet.model.User;
-import com.toni.virtualpet.model.enums.Role;
+import com.toni.virtualpet.model.user.User;
+import com.toni.virtualpet.model.user.enums.Role;
 import com.toni.virtualpet.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

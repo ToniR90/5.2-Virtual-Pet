@@ -1,6 +1,6 @@
 package com.toni.virtualpet.dto.response;
 
-import com.toni.virtualpet.model.Pet;
+import com.toni.virtualpet.model.pet.Pet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

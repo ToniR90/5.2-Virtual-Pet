@@ -1,6 +1,6 @@
 package com.toni.virtualpet.service;
 
-import com.toni.virtualpet.model.User;
+import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.repository.UserRepository;
 import com.toni.virtualpet.security.UserPrincipal;
 import jakarta.transaction.Transactional;

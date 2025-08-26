@@ -1,8 +1,10 @@
-package com.toni.virtualpet.model;
+package com.toni.virtualpet.model.pet;
 
-import com.toni.virtualpet.model.base.AuditableEntity;
-import com.toni.virtualpet.model.enums.Stage;
-import com.toni.virtualpet.model.enums.Variant;
+import com.toni.virtualpet.model.AuditableEntity;
+import com.toni.virtualpet.model.petAction.PetAction;
+import com.toni.virtualpet.model.user.User;
+import com.toni.virtualpet.model.pet.enums.Stage;
+import com.toni.virtualpet.model.pet.enums.Variant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,24 +33,24 @@ public class Pet extends AuditableEntity {
     private String name;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "variant", nullable = false)
     @Enumerated(EnumType.STRING)
     private Variant variant;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "stage", nullable = false)
     private Stage stage = Stage.EGG;
 
-    @Column(nullable = false)
+    @Column(name = "experience", nullable = false)
     private Integer experience = 0;
 
-    @Column(nullable = false)
+    @Column(name = "energy", nullable = false)
     private Integer energy = 50;
 
-    @Column(nullable = false)
+    @Column(name = "happiness", nullable = false)
     private Integer happiness = 50;
 
-    @Column(nullable = false)
+    @Column(name = "hunger", nullable = false)
     private Integer hunger = 50;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -143,6 +145,6 @@ public class Pet extends AuditableEntity {
                 "Energy: " + energy + "\n" +
                 "Happiness: " + happiness + "\n" +
                 "Hunger: " + hunger + "\n" +
-                "Owner: " + owner + "\n";
+                "Owner: " + owner.getUsername() + "\n";
     }
 }

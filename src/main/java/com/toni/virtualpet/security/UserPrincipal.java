@@ -1,6 +1,6 @@
 package com.toni.virtualpet.security;
 
-import com.toni.virtualpet.model.User;
+import com.toni.virtualpet.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

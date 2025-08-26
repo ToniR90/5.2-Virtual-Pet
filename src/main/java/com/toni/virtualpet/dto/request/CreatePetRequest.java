@@ -1,6 +1,6 @@
 package com.toni.virtualpet.dto.request;
 
-import com.toni.virtualpet.model.enums.Variant;
+import com.toni.virtualpet.model.pet.enums.Variant;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

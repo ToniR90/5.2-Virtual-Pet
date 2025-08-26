@@ -5,7 +5,7 @@ import com.toni.virtualpet.dto.request.RegisterRequest;
 import com.toni.virtualpet.dto.response.ApiResponse;
 import com.toni.virtualpet.dto.response.JwtResponse;
 import com.toni.virtualpet.dto.response.UserResponse;
-import com.toni.virtualpet.model.User;
+import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.service.AuthService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

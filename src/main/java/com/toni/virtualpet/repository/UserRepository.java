@@ -1,6 +1,6 @@
 package com.toni.virtualpet.repository;
 
-import com.toni.virtualpet.model.User;
+import com.toni.virtualpet.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
 package com.toni.virtualpet.repository;
 
-import com.toni.virtualpet.model.Pet;
-import com.toni.virtualpet.model.User;
-import com.toni.virtualpet.model.enums.Stage;
-import com.toni.virtualpet.model.enums.Variant;
+import com.toni.virtualpet.model.pet.Pet;
+import com.toni.virtualpet.model.user.User;
+import com.toni.virtualpet.model.pet.enums.Stage;
+import com.toni.virtualpet.model.pet.enums.Variant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
