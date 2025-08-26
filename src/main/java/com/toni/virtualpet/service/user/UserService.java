@@ -27,7 +27,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public boolean existByUsername(String username) {
+    public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
 
