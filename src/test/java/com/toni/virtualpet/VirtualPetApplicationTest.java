@@ -5,7 +5,7 @@ import com.toni.virtualpet.repository.PetActionRepository;
 import com.toni.virtualpet.repository.PetRepository;
 import com.toni.virtualpet.repository.UserRepository;
 import com.toni.virtualpet.service.AuthService;
-import com.toni.virtualpet.service.PetService;
+import com.toni.virtualpet.service.pet.PetService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -12,6 +12,7 @@ import com.toni.virtualpet.model.pet.enums.Variant;
 import com.toni.virtualpet.repository.PetActionRepository;
 import com.toni.virtualpet.repository.PetRepository;
 import com.toni.virtualpet.repository.UserRepository;
+import com.toni.virtualpet.service.pet.PetService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

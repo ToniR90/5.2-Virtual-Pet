@@ -69,7 +69,7 @@ public class Pet extends AuditableEntity {
         this.stage = Stage.getStageForExperience(this.experience);
     }
 
-    public void feed() {
+    /*public void feed() {
         this.hunger = Math.min(100 , this.hunger + 20);
         this.happiness = Math.min(100 , this.happiness + 10);
         this.setLastAction(LocalDateTime.now());
@@ -132,7 +132,7 @@ public class Pet extends AuditableEntity {
                 case FOREST -> "💚🐲";
             };
         };
-    }
+    }*/
 
     @Override
     public String toString() {

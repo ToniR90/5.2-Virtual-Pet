@@ -3,7 +3,7 @@ package com.toni.virtualpet.controller;
 import com.toni.virtualpet.dto.request.CreatePetRequest;
 import com.toni.virtualpet.dto.response.ApiResponse;
 import com.toni.virtualpet.dto.response.PetResponse;
-import com.toni.virtualpet.service.PetService;
+import com.toni.virtualpet.service.pet.PetService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

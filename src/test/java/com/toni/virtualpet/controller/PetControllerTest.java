@@ -6,7 +6,7 @@ import com.toni.virtualpet.dto.response.PetResponse;
 import com.toni.virtualpet.model.pet.enums.Variant;
 import com.toni.virtualpet.security.JwtRequestFilter;
 import com.toni.virtualpet.security.JwtUtils;
-import com.toni.virtualpet.service.PetService;
+import com.toni.virtualpet.service.pet.PetService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

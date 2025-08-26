@@ -1,4 +1,4 @@
-package com.toni.virtualpet.service;
+package com.toni.virtualpet.service.pet;
 
 import com.toni.virtualpet.dto.request.CreatePetRequest;
 import com.toni.virtualpet.dto.response.PetResponse;
