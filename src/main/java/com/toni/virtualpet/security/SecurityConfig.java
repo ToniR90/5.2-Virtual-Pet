@@ -1,6 +1,7 @@
 package com.toni.virtualpet.security;
 
 import com.toni.virtualpet.service.user.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,15 +28,11 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
     private UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
-
-    @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Bean
@@ -50,7 +47,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
 
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/**").hasAnyRole("ADMIN" , "SUPER_ADMIN")
 
                         .anyRequest().authenticated()
                 )
