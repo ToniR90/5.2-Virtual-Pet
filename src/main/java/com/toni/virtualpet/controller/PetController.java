@@ -20,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/pets")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @AllArgsConstructor
+@PreAuthorize("hasRole('USER')")
 public class PetController {
 
     private static final Logger logger = LoggerFactory.getLogger(PetController.class);
@@ -27,7 +28,6 @@ public class PetController {
     private PetService petService;
 
     @PostMapping
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ApiResponse<PetResponse>> createPet(@Valid @RequestBody CreatePetRequest request) {
         logger.info("Creating new pet: {}", request.getName());
 
@@ -62,6 +62,18 @@ public class PetController {
         );
     }
 
+    @DeleteMapping("/{petId}")
+    public ResponseEntity<ApiResponse<Void>> deletePet(@PathVariable Long petId) {
+        logger.info("Deleting pet: {}", petId);
+
+        petService.deletePet(petId);
+
+        logger.info("Pet deleted successfully: {}", petId);
+        return ResponseEntity.ok(
+                ApiResponse.success("Dragon released to the wild", null)
+        );
+    }
+
     @PostMapping("/{petId}/feed")
     public ResponseEntity<ApiResponse<PetResponse>> feedPet(@PathVariable Long petId) {
         logger.info("Feeding pet: {}", petId);
@@ -70,7 +82,7 @@ public class PetController {
 
         logger.info("Pet fed successfully: {}", petResponse.getName());
         return ResponseEntity.ok(
-                ApiResponse.success("Dragon fed successfully! 🍖", petResponse)
+                ApiResponse.success("Dragon feed successfully! 🍖", petResponse)
         );
     }
 
@@ -119,18 +131,6 @@ public class PetController {
         logger.info("Pet evolved successfully: {} -> {}", petResponse.getName(), petResponse.getStage());
         return ResponseEntity.ok(
                 ApiResponse.success("Dragon evolved! ✨", petResponse)
-        );
-    }
-
-    @DeleteMapping("/{petId}")
-    public ResponseEntity<ApiResponse<Void>> deletePet(@PathVariable Long petId) {
-        logger.info("Deleting pet: {}", petId);
-
-        petService.deletePet(petId);
-
-        logger.info("Pet deleted successfully: {}", petId);
-        return ResponseEntity.ok(
-                ApiResponse.success("Dragon released to the wild", null)
         );
     }
 }
