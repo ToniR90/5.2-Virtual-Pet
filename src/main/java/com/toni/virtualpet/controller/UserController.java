@@ -7,6 +7,8 @@ import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.service.user.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<UserResponse>> getCurrentUser() {
@@ -36,6 +40,9 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity<ApiResponse<UserResponse>> deleteUserAccount() {
         userService.deleteCurrentUser();
+
+        logger.info("User account deleted successfully");
+
         return ResponseEntity.ok(ApiResponse.success("User account deleted" , null));
     }
 }

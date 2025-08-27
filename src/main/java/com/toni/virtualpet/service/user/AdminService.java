@@ -1,19 +1,19 @@
 package com.toni.virtualpet.service.user;
 
 import com.toni.virtualpet.dto.response.PetResponse;
+import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.exception.personalizedException.PetNotFoundException;
 import com.toni.virtualpet.exception.personalizedException.UserNotFoundException;
 import com.toni.virtualpet.model.pet.Pet;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.model.pet.enums.Stage;
 import com.toni.virtualpet.model.pet.enums.Variant;
+import com.toni.virtualpet.model.user.enums.Role;
 import com.toni.virtualpet.repository.PetRepository;
 import com.toni.virtualpet.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -89,5 +89,15 @@ public class AdminService {
         return pets.stream()
                 .map(PetResponse::from)
                 .collect(Collectors.toList());
+    }
+
+    public UserResponse getUserById(long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return UserResponse.from(user);
+    }
+
+    public List<User> getUserByRole(Role role) {
+        return userRepository.findByRole(role);
     }
 }
