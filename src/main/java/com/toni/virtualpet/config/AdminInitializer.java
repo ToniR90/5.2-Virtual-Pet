@@ -27,7 +27,7 @@ public class AdminInitializer implements CommandLineRunner {
             admin.setUsername("admin");
             admin.setEmail("admin@virtualpet.com");
             admin.setPassword(passwordEncoder.encode("admin123"));
-            admin.setRole(Role.ROLE_ADMIN);
+            admin.setRole(Role.ROLE_SUPER_ADMIN);
 
             userRepository.save(admin);
             log.info("✅ Admin created: admin/admin123");

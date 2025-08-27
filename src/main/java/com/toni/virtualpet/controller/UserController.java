@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "*" , maxAge = 3600)
 @AllArgsConstructor
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("isAuthenticated()")
 public class UserController {
 
     private final UserService userService;

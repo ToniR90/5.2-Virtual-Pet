@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/pets")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @AllArgsConstructor
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("isAuthenticated()")
 public class PetController {
 
     private static final Logger logger = LoggerFactory.getLogger(PetController.class);
