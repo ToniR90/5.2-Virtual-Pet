@@ -4,13 +4,11 @@ import com.toni.virtualpet.dto.response.ApiResponse;
 import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.service.user.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
@@ -27,4 +25,17 @@ public class UserController {
 
         return ResponseEntity.ok(ApiResponse.success("User retrieved successfully" , UserResponse.from(user)));
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse<UserResponse>> updateUser(@Valid @RequestBody UpdateUserRequest request) {
+
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ApiResponse<UserResponse>> deleteUserAccount() {
+        userService.deleteCurrentUser();
+        return ResponseEntity.ok(ApiResponse.success("User account deleted" , null));
+    }
+
+
 }
