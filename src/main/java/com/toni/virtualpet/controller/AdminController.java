@@ -7,6 +7,7 @@ import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.model.pet.enums.Stage;
 import com.toni.virtualpet.model.pet.enums.Variant;
 import com.toni.virtualpet.service.user.AdminService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/admin")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @PreAuthorize("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
+@AllArgsConstructor
 public class AdminController {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-    @Autowired
     private AdminService adminService;
 
     @GetMapping("/pets")
