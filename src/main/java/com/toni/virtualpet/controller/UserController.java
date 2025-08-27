@@ -1,5 +1,6 @@
 package com.toni.virtualpet.controller;
 
+import com.toni.virtualpet.dto.request.UpdateUserRequest;
 import com.toni.virtualpet.dto.response.ApiResponse;
 import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.model.user.User;
@@ -28,7 +29,8 @@ public class UserController {
 
     @PutMapping("/update")
     public ResponseEntity<ApiResponse<UserResponse>> updateUser(@Valid @RequestBody UpdateUserRequest request) {
-
+        User updateUser = userService.updateUser(request);
+        return ResponseEntity.ok(ApiResponse.success("User update successfully" , UserResponse.from(updateUser)));
     }
 
     @DeleteMapping("/delete")
@@ -36,6 +38,4 @@ public class UserController {
         userService.deleteCurrentUser();
         return ResponseEntity.ok(ApiResponse.success("User account deleted" , null));
     }
-
-
 }
