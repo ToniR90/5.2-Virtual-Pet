@@ -8,21 +8,23 @@ import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.service.user.AuthService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*", maxAge = 3600)
+@AllArgsConstructor
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    @Autowired
     private AuthService authService;
 
     @PostMapping("/login")
@@ -50,6 +52,7 @@ public class AuthController {
                 .body(ApiResponse.success("User registered successfully", userResponse));
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/verify")
     public ResponseEntity<ApiResponse<String>> verifyToken() {
         return ResponseEntity.ok(
