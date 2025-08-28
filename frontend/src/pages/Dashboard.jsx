@@ -24,8 +24,6 @@ const Dashboard = () => {
   useEffect(() => {
     const token = getToken();
 
-    console.log('Token being sent:', token); // 👉 Afegeix-lo aquí
-
     if (!token) {
       navigate('/');
       return;
@@ -37,27 +35,36 @@ const Dashboard = () => {
       },
     })
       .then(res => res.json())
-      .then(data => setUser(data))
+      .then(data => setUser(data.data))
       .catch(err => {
         console.error('Error fetching user:', err);
         navigate('/');
       });
   }, [navigate]);
 
-  if (!user) return <div className="auth-box">Loading...</div>;
+  if (!user) return <div className="dashboard-box">Loading...</div>;
 
   return (
     <div style={containerStyle}>
       <div className="dashboard-box">
-        <h2>Welcome back, {user.username} 🐾</h2>
+        <h2>👋 Welcome back, {user.username}</h2>
         <p>Email: {user.email}</p>
         <p>Role: {user.role}</p>
+
+        <hr />
+
+        <button onClick={() => navigate('/verify')}>🔍 Verify Token</button>
+        <button onClick={() => navigate('/pets')}>🐾 View Pets</button>
+        <button onClick={() => navigate('/pets/create')}>➕ Add Pet</button>
+        <button onClick={() => navigate('/profile')}>👤 Profile</button>
+
+        <hr />
 
         <button onClick={() => {
           clearToken();
           navigate('/');
         }}>
-          Log out
+          🚪 Log out
         </button>
       </div>
     </div>

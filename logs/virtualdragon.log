@@ -1983,3 +1983,29 @@ org.springframework.security.authentication.BadCredentialsException: Bad credent
 2025-08-28 18:04:33 [http-nio-8080-exec-1] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
 2025-08-28 18:04:33 [http-nio-8080-exec-2] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
 2025-08-28 18:04:33 [http-nio-8080-exec-2] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:12:17 [http-nio-8080-exec-6] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:12:17 [http-nio-8080-exec-6] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:13:37 [http-nio-8080-exec-9] INFO  c.t.v.controller.AuthController - Login request for user: admin
+2025-08-28 18:13:37 [http-nio-8080-exec-9] INFO  c.t.v.service.user.AuthService - Login try for user: admin
+2025-08-28 18:13:37 [http-nio-8080-exec-9] INFO  c.t.v.service.user.AuthService - Login successful for user: admin
+2025-08-28 18:13:37 [http-nio-8080-exec-9] INFO  c.t.v.controller.AuthController - Login successful for user: admin
+2025-08-28 18:13:37 [http-nio-8080-exec-2] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:13:37 [http-nio-8080-exec-2] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:13:37 [http-nio-8080-exec-3] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:13:37 [http-nio-8080-exec-3] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:18:37 [http-nio-8080-exec-8] INFO  c.t.v.controller.AuthController - Login request for user: admin
+2025-08-28 18:18:37 [http-nio-8080-exec-8] INFO  c.t.v.service.user.AuthService - Login try for user: admin
+2025-08-28 18:18:37 [http-nio-8080-exec-8] INFO  c.t.v.service.user.AuthService - Login successful for user: admin
+2025-08-28 18:18:37 [http-nio-8080-exec-8] INFO  c.t.v.controller.AuthController - Login successful for user: admin
+2025-08-28 18:18:37 [http-nio-8080-exec-10] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:18:37 [http-nio-8080-exec-10] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:18:37 [http-nio-8080-exec-1] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:18:37 [http-nio-8080-exec-1] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:18:52 [http-nio-8080-exec-3] INFO  c.t.v.controller.AuthController - Login request for user: admin
+2025-08-28 18:18:52 [http-nio-8080-exec-3] INFO  c.t.v.service.user.AuthService - Login try for user: admin
+2025-08-28 18:18:52 [http-nio-8080-exec-3] INFO  c.t.v.service.user.AuthService - Login successful for user: admin
+2025-08-28 18:18:52 [http-nio-8080-exec-3] INFO  c.t.v.controller.AuthController - Login successful for user: admin
+2025-08-28 18:18:53 [http-nio-8080-exec-6] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:18:53 [http-nio-8080-exec-6] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-28 18:18:53 [http-nio-8080-exec-8] ERROR c.toni.virtualpet.security.JwtUtils - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0
+2025-08-28 18:18:53 [http-nio-8080-exec-8] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource

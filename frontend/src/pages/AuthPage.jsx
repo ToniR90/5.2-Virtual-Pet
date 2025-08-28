@@ -36,10 +36,11 @@ const AuthPage = () => {
       });
 
       const data = await response.json();
+      console.log('Login response:', data); // 👉 Aquí veuràs què retorna el backend
 
       if (response.ok) {
-        saveToken(data.token); // ✅ Guarda el token
-        navigate('/dashboard'); // ✅ Redirigeix a la vista protegida
+        saveToken(data.data.token); // 👈 Assegura’t que accedeixes correctament al token
+        navigate('/dashboard');
       } else {
         alert(data.message || 'Login failed');
       }
