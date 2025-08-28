@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import background from '../assets/background.jpg';
 import './AuthPage.css';
+import RegisterForm from '../components/RegisterForm';
 
 const AuthPage = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
+
   const containerStyle = {
     backgroundImage: `url(${background})`,
     backgroundSize: 'contain',
@@ -19,17 +22,24 @@ const AuthPage = () => {
 
   return (
     <div style={containerStyle}>
-      <div className="auth-box">
-        <h2>Welcome to your Virtual Pet Manager 🐉</h2>
-        <form>
-          <input type="text" placeholder="User" />
-          <input type="password" placeholder="Password" />
-          <button type="submit">Sign In</button>
-        </form>
-        <p className="register-text">
-          Not registered? <button className="link-button">Click here!</button>
-        </p>
-      </div>
+      {isRegistering ? (
+        <RegisterForm onSwitch={() => setIsRegistering(false)} />
+      ) : (
+        <div className="auth-box">
+          <h2>Inicia sessió</h2>
+          <form>
+            <input type="text" placeholder="Usuari" />
+            <input type="password" placeholder="Contrasenya" />
+            <button type="submit">Entrar</button>
+          </form>
+          <p className="register-text">
+            No estàs registrat?{' '}
+            <button className="link-button" onClick={() => setIsRegistering(true)}>
+              Registra't aquí!
+            </button>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
