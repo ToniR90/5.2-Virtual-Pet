@@ -58,7 +58,7 @@ const AuthPage = () => {
       {isRegistering ? (
         <RegisterForm onSwitch={() => setIsRegistering(false)} />
       ) : (
-        <div className="auth-box">
+        <div className="login-box">
           <h2>🐉Welcome to your Virtual Pet Manager!!🐉</h2>
           <form onSubmit={handleSubmit}> {/* ✅ Afegim la funció de submit */}
             <input

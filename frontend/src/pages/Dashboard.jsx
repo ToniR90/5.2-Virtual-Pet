@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dashboardBg from '../assets/dashboard.jpg';
 import { getToken, clearToken } from '../utils/auth';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -47,7 +48,7 @@ const Dashboard = () => {
 
   return (
     <div style={containerStyle}>
-      <div className="auth-box">
+      <div className="dashboard-box">
         <h2>Welcome back, {user.username} 🐾</h2>
         <p>Email: {user.email}</p>
         <p>Role: {user.role}</p>

@@ -1,4 +1,4 @@
-.auth-box {
+.login-box {
   position: absolute;
   bottom: 2rem;
   left: 2rem;
@@ -12,23 +12,23 @@
   flex-direction: column;
 }
 
-.auth-box h2 {
+.login-box h2 {
   margin-bottom: 1rem;
 }
 
-.auth-box form {
+.login-box form {
   display: flex;
   flex-direction: column;
 }
 
-.auth-box input {
+.login-box input {
   margin-bottom: 1rem;
   padding: 0.5rem;
   border: none;
   border-radius: 5px;
 }
 
-.auth-box button {
+.login-box button {
   padding: 0.5rem;
   background-color: #00aaff;
   color: white;
@@ -37,7 +37,7 @@
   cursor: pointer;
 }
 
-.auth-box button:hover {
+.login-box button:hover {
   background-color: #0088cc;
 }
 
@@ -62,7 +62,7 @@
   padding: 0;
 }
 
-.auth-box button[type="submit"] {
+.login-box button[type="submit"] {
   padding: 0.5rem;
   background-color: #00cc66;
   color: white;
@@ -71,6 +71,6 @@
   cursor: pointer;
 }
 
-.auth-box button[type="submit"]:hover {
+.login-box button[type="submit"]:hover {
   background-color: #00994d;
 }
