@@ -17,7 +17,7 @@ const RegisterForm = ({ onSwitch }) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Les contrasenyes no coincideixen");
+      alert("Passwords don't match");
       return;
     }
 
@@ -34,22 +34,22 @@ const RegisterForm = ({ onSwitch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('Usuari creat:', data);
+        console.log('User successfully created:', data);
         // Aquí pots redirigir o mostrar missatge
       })
       .catch((err) => {
-        console.error('Error en el registre:', err);
+        console.error('Error:', err);
       });
   };
 
   return (
     <div className="auth-box">
-      <h2>Registra't</h2>
+      <h2>🐉Create an account🐉</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="username"
-          placeholder="Nom d'usuari"
+          placeholder="Username"
           value={formData.username}
           onChange={handleChange}
           required
@@ -57,7 +57,7 @@ const RegisterForm = ({ onSwitch }) => {
         <input
           type="email"
           name="email"
-          placeholder="Correu electrònic"
+          placeholder="Email"
           value={formData.email}
           onChange={handleChange}
           required
@@ -65,7 +65,7 @@ const RegisterForm = ({ onSwitch }) => {
         <input
           type="password"
           name="password"
-          placeholder="Contrasenya"
+          placeholder="Password"
           value={formData.password}
           onChange={handleChange}
           required
@@ -73,17 +73,17 @@ const RegisterForm = ({ onSwitch }) => {
         <input
           type="password"
           name="confirmPassword"
-          placeholder="Confirma la contrasenya"
+          placeholder="Confirm password"
           value={formData.confirmPassword}
           onChange={handleChange}
           required
         />
-        <button type="submit">Crear compte</button>
+        <button type="submit">Create</button>
       </form>
       <p className="register-text">
-        Ja tens compte?{' '}
+        Already registered?{' '}
         <button className="link-button" onClick={onSwitch}>
-          Inicia sessió
+          Sign in
         </button>
       </p>
     </div>
