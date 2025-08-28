@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // ✅ Necessari per redirigir
 import background from '../assets/background.jpg';
 import './AuthPage.css';
 import RegisterForm from '../components/RegisterForm';
+import { saveToken } from '../utils/auth';
 
 const AuthPage = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -28,7 +29,7 @@ const AuthPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -37,7 +38,7 @@ const AuthPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', data.token); // ✅ Guarda el token
+        saveToken(data.token); // ✅ Guarda el token
         navigate('/dashboard'); // ✅ Redirigeix a la vista protegida
       } else {
         alert(data.message || 'Login failed');
