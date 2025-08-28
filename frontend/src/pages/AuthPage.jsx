@@ -26,16 +26,16 @@ const AuthPage = () => {
         <RegisterForm onSwitch={() => setIsRegistering(false)} />
       ) : (
         <div className="auth-box">
-          <h2>Inicia sessió</h2>
+          <h2>🐉Welcome to your Virtual Pet Manager!!🐉</h2>
           <form>
-            <input type="text" placeholder="Usuari" />
-            <input type="password" placeholder="Contrasenya" />
-            <button type="submit">Entrar</button>
+            <input type="text" placeholder="User" />
+            <input type="password" placeholder="Password" />
+            <button type="submit">Sign In</button>
           </form>
           <p className="register-text">
-            No estàs registrat?{' '}
+            Don't have an account?{' '}
             <button className="link-button" onClick={() => setIsRegistering(true)}>
-              Registra't aquí!
+              Click here
             </button>
           </p>
         </div>
