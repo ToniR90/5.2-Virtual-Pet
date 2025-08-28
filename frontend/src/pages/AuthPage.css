@@ -1,0 +1,11 @@
+.auth-box {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  z-index: 1;
+}
