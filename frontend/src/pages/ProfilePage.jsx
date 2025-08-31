@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
-import profileBg from '../assets/profile.jpg'; // ✅ Imatge de fons
+import profileBg from '../assets/profile.jpg';
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -21,7 +21,7 @@ const ProfilePage = () => {
       },
     })
       .then(res => res.json())
-      .then(data => setUser(data.data)) // ✅ Accedim a la part útil
+      .then(data => setUser(data.data))
       .catch(err => {
         console.error('Error fetching profile:', err);
         navigate('/');
@@ -41,6 +41,18 @@ const ProfilePage = () => {
     position: 'relative',
   };
 
+  const formatDate = (isoString) => {
+    if (!isoString) return 'Encara no hi ha accions registrades';
+    const date = new Date(isoString);
+    return date.toLocaleString('ca-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
   if (!user) {
     return (
       <div style={containerStyle}>
@@ -56,6 +68,12 @@ const ProfilePage = () => {
         <p><strong>Usuari:</strong> {user.username}</p>
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Rol:</strong> {user.role}</p>
+        <p><strong>Creat el:</strong> {formatDate(user.createdAt)}</p>
+        <p><strong>Última acció amb mascota:</strong> {formatDate(user.lastPetAction)}</p>
+
+        <button className="edit-button" onClick={() => navigate('/profile/edit')}>
+          ✏️ Modificar perfil
+        </button>
       </div>
     </div>
   );

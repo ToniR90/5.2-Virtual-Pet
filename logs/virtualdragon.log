@@ -38,3 +38,11 @@
 2025-08-31 22:05:41 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-08-31 22:05:41 [http-nio-8080-exec-2] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
 2025-08-31 22:05:41 [http-nio-8080-exec-1] ERROR c.t.v.s.JwtAuthenticationEntryPoint - Unauthorized error: Full authentication is required to access this resource
+2025-08-31 22:06:39 [http-nio-8080-exec-5] INFO  c.t.v.controller.AuthController - Login request for user: admin
+2025-08-31 22:06:39 [http-nio-8080-exec-5] INFO  c.t.v.service.user.AuthService - Login try for user: admin
+2025-08-31 22:06:40 [http-nio-8080-exec-5] INFO  c.t.v.service.user.AuthService - Login successful for user: admin
+2025-08-31 22:06:40 [http-nio-8080-exec-5] INFO  c.t.v.controller.AuthController - Login successful for user: admin
+2025-08-31 22:18:46 [http-nio-8080-exec-6] INFO  c.t.v.controller.AuthController - Login request for user: admin
+2025-08-31 22:18:46 [http-nio-8080-exec-6] INFO  c.t.v.service.user.AuthService - Login try for user: admin
+2025-08-31 22:18:46 [http-nio-8080-exec-6] INFO  c.t.v.service.user.AuthService - Login successful for user: admin
+2025-08-31 22:18:46 [http-nio-8080-exec-6] INFO  c.t.v.controller.AuthController - Login successful for user: admin
