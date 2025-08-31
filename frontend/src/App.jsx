@@ -6,6 +6,8 @@ import ProfilePage from './pages/ProfilePage'; // ✅ Importa la nova pàgina
 import PrivateRoute from './components/PrivateRoute'; // ✅ Protegeix rutes privades
 import EditProfile from './pages/EditProfile';
 import AdminUsersPage from './pages/AdminUsersPage';
+import GoodbyePage from './pages/GoodbyePage';
+
 
 
 
@@ -46,6 +48,10 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/goodbye"
+        element={
+            <GoodbyePage />} />
+
       </Routes>
     </BrowserRouter>
   );

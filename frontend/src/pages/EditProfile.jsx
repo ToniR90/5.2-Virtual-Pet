@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getToken } from '../utils/auth';
+import { getToken, clearToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import profileBg from '../assets/profile.jpg';
 import './EditProfile.css';
@@ -24,9 +24,7 @@ const EditProfile = () => {
     }
 
     fetch('http://localhost:8080/api/user/me', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => {
@@ -86,6 +84,30 @@ const EditProfile = () => {
       }
     } catch (err) {
       console.error('Error updating profile:', err);
+      setMessage('❌ Error inesperat');
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    const confirm = window.confirm('Estàs segur que vols eliminar el teu compte? Aquesta acció és irreversible.');
+    if (!confirm) return;
+
+    const token = getToken();
+    try {
+      const res = await fetch('http://localhost:8080/api/user/delete', {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        clearToken();
+        navigate('/goodbye'); // ✅ Redirecció a la pantalla de comiat
+      } else {
+        const result = await res.json();
+        setMessage('❌ Error: ' + result.message);
+      }
+    } catch (err) {
+      console.error('Error deleting account:', err);
       setMessage('❌ Error inesperat');
     }
   };
@@ -161,6 +183,13 @@ const EditProfile = () => {
         />
 
         <button onClick={handleSubmit}>💾 Guardar canvis</button>
+
+        <hr />
+
+        <button className="delete-button" onClick={handleDeleteAccount}>
+          🗑️ Eliminar compte
+        </button>
+
         {message && <p className="message">{message}</p>}
       </div>
     </div>
