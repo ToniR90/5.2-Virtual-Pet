@@ -51,7 +51,6 @@ const Dashboard = () => {
     <div style={containerStyle}>
       <div className="dashboard-box">
         <h2>👋 Welcome back, {user.username}</h2>
-        <p>Role: {user.role.replace('ROLE_', '')}</p>
 
         <hr />
 

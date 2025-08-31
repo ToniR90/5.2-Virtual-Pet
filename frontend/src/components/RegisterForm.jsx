@@ -31,6 +31,7 @@ const RegisterForm = ({ onSwitch }) => {
     };
 
     try {
+      // 🔐 Registre
       const res = await fetch('http://localhost:8080/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -39,10 +40,30 @@ const RegisterForm = ({ onSwitch }) => {
 
       const data = await res.json();
 
-      if (res.ok && data.data && data.data.token) {
-        localStorage.setItem('token', data.data.token);
-        console.log('Usuari creat i token guardat:', data.data);
-        navigate('/dashboard');
+      if (res.ok) {
+        console.log('✅ Usuari registrat correctament:', data.message);
+
+        // 🔐 Login automàtic
+        const loginPayload = {
+          username: formData.username,
+          password: formData.password,
+        };
+
+        const loginRes = await fetch('http://localhost:8080/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(loginPayload),
+        });
+
+        const loginData = await loginRes.json();
+
+        if (loginRes.ok && loginData.data && loginData.data.token) {
+          localStorage.setItem('token', loginData.data.token);
+          console.log('🔓 Sessió iniciada automàticament');
+          navigate('/dashboard');
+        } else {
+          alert('⚠️ Registrat però no s’ha pogut iniciar sessió automàticament');
+        }
       } else {
         alert('❌ Error: ' + (data.message || 'No s’ha pogut registrar'));
       }
