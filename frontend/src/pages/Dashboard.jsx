@@ -44,18 +44,38 @@ const Dashboard = () => {
 
   if (!user) return <div className="dashboard-box">Loading...</div>;
 
+  const isAdmin = user.role === 'ROLE_ADMIN' || user.role === 'ROLE_SUPER_ADMIN';
+  const isSuperAdmin = user.role === 'ROLE_SUPER_ADMIN';
+
   return (
     <div style={containerStyle}>
       <div className="dashboard-box">
         <h2>👋 Welcome back, {user.username}</h2>
+        <p>Role: {user.role.replace('ROLE_', '')}</p>
 
-       <hr />
+        <hr />
 
-        <button onClick={() => navigate('/profile')}>👤 Profile</button>
-        <button onClick={() => navigate('/verify')}>🔍 Verify Token</button>
-        <button onClick={() => navigate('/pets')}>🐾 View Pets</button>
-        <button onClick={() => navigate('/pets/create')}>➕ Add Pet</button>
+        {/* Opcions comunes per tots els rols */}
+        <button onClick={() => navigate('/profile')}>👤 View Profile</button>
+        <button onClick={() => navigate('/pets')}>🐾 View My Pets</button>
+        <button onClick={() => navigate('/pets/create')}>➕ Create Pet</button>
 
+        {/* Opcions per ADMIN i SUPER_ADMIN */}
+        {isAdmin && (
+          <>
+            <hr />
+            <button onClick={() => navigate('/admin/users')}>👥 View All Users</button>
+            <button onClick={() => navigate('/admin/pets')}>🐾 View All Pets</button>
+          </>
+        )}
+
+        {/* Opció exclusiva per SUPER_ADMIN */}
+        {isSuperAdmin && (
+          <>
+            <hr />
+            <button onClick={() => navigate('/admin/roles')}>🔄 Manage User Roles</button>
+          </>
+        )}
 
         <hr />
 

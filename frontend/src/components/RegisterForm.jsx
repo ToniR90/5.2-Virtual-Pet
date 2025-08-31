@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../pages/AuthPage.css'; // Reutilitzem els estils
+import '../pages/AuthPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = ({ onSwitch }) => {
   const [formData, setFormData] = useState({
@@ -9,11 +10,13 @@ const RegisterForm = ({ onSwitch }) => {
     confirmPassword: '',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -24,22 +27,31 @@ const RegisterForm = ({ onSwitch }) => {
     const payload = {
       username: formData.username,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
     };
 
-    fetch('http://localhost:8080/api/createUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('User successfully created:', data);
-        // Aquí pots redirigir o mostrar missatge
-      })
-      .catch((err) => {
-        console.error('Error:', err);
+    try {
+      const res = await fetch('http://localhost:8080/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      const data = await res.json();
+
+      if (res.ok && data.data && data.data.token) {
+        // ✅ Guarda el token
+        localStorage.setItem('token', data.data.token);
+
+        console.log('Usuari creat i token guardat:', data.data);
+        navigate('/dashboard');
+      } else {
+        alert('❌ Error: ' + (data.message || 'No s’ha pogut registrar'));
+      }
+    } catch (err) {
+      console.error('Error inesperat:', err);
+      alert('❌ Error inesperat');
+    }
   };
 
   return (

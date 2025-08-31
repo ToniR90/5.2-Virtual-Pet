@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import ProfilePage from './pages/ProfilePage'; // ✅ Importa la nova pàgina
 import PrivateRoute from './components/PrivateRoute'; // ✅ Protegeix rutes privades
 import EditProfile from './pages/EditProfile';
+import AdminUsersPage from './pages/AdminUsersPage';
+
 
 
 function App() {
@@ -33,6 +35,14 @@ function App() {
           element={
             <PrivateRoute>
               <EditProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <PrivateRoute>
+              <AdminUsersPage />
             </PrivateRoute>
           }
         />
