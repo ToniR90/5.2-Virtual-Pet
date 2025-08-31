@@ -40,9 +40,7 @@ const RegisterForm = ({ onSwitch }) => {
       const data = await res.json();
 
       if (res.ok && data.data && data.data.token) {
-        // ✅ Guarda el token
         localStorage.setItem('token', data.data.token);
-
         console.log('Usuari creat i token guardat:', data.data);
         navigate('/dashboard');
       } else {
@@ -55,7 +53,7 @@ const RegisterForm = ({ onSwitch }) => {
   };
 
   return (
-    <div className="auth-box">
+    <div className="register-box">
       <h2>🐉Create an account🐉</h2>
       <form onSubmit={handleSubmit}>
         <input
