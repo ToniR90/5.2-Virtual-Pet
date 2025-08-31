@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
 import Dashboard from './pages/Dashboard';
-import PrivateRoute from './components/PrivateRoute'; // ✅ Importa el protector
+import ProfilePage from './pages/ProfilePage'; // ✅ Importa la nova pàgina
+import PrivateRoute from './components/PrivateRoute'; // ✅ Protegeix rutes privades
 
 function App() {
   return (
@@ -14,6 +15,14 @@ function App() {
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <ProfilePage />
             </PrivateRoute>
           }
         />

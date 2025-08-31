@@ -48,15 +48,14 @@ const Dashboard = () => {
     <div style={containerStyle}>
       <div className="dashboard-box">
         <h2>👋 Welcome back, {user.username}</h2>
-        <p>Email: {user.email}</p>
-        <p>Role: {user.role}</p>
 
-        <hr />
+       <hr />
 
+        <button onClick={() => navigate('/profile')}>👤 Profile</button>
         <button onClick={() => navigate('/verify')}>🔍 Verify Token</button>
         <button onClick={() => navigate('/pets')}>🐾 View Pets</button>
         <button onClick={() => navigate('/pets/create')}>➕ Add Pet</button>
-        <button onClick={() => navigate('/profile')}>👤 Profile</button>
+
 
         <hr />
 
