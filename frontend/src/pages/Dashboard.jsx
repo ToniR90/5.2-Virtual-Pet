@@ -45,7 +45,6 @@ const Dashboard = () => {
   if (!user) return <div className="dashboard-box">Loading...</div>;
 
   const isAdmin = user.role === 'ROLE_ADMIN' || user.role === 'ROLE_SUPER_ADMIN';
-  const isSuperAdmin = user.role === 'ROLE_SUPER_ADMIN';
 
   return (
     <div style={containerStyle}>
@@ -62,13 +61,6 @@ const Dashboard = () => {
             <hr />
             <button onClick={() => navigate('/admin/users')}>👥 View All Users</button>
             <button onClick={() => navigate('/admin/pets')}>🐾 View All Pets</button>
-          </>
-        )}
-
-        {isSuperAdmin && (
-          <>
-            <hr />
-            <button onClick={() => navigate('/admin/roles')}>🔄 Manage User Roles</button>
           </>
         )}
 

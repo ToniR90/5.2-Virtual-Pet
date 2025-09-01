@@ -104,4 +104,9 @@ public class AdminService {
     public void deleteUserById(Long userId) {
         userRepository.deleteById(userId);
     }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+        logger.info("User {} saved with role {}", user.getUsername(), user.getRole());
+    }
 }

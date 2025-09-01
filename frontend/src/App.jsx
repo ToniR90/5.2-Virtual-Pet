@@ -5,10 +5,11 @@ import Dashboard from './pages/Dashboard';
 import ProfilePage from './pages/ProfilePage';
 import EditProfile from './pages/EditProfile';
 import AdminUsersPage from './pages/AdminUsersPage';
+import AdminPetsPage from './pages/AdminPetsPage'; // ✅ Nova vista afegida
 import GoodbyePage from './pages/GoodbyePage';
 import MyPets from './pages/MyPets';
 import CreatePet from './pages/CreatePet';
-import PetDetail from './pages/PetDetail'; // ✅ Nova vista detallada
+import PetDetail from './pages/PetDetail';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -45,6 +46,14 @@ function App() {
           element={
             <PrivateRoute>
               <AdminUsersPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/pets"
+          element={
+            <PrivateRoute>
+              <AdminPetsPage />
             </PrivateRoute>
           }
         />

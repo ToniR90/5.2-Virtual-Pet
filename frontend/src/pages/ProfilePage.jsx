@@ -69,18 +69,6 @@ const ProfilePage = () => {
     position: 'relative',
   };
 
-  const formatDate = (isoString) => {
-    if (!isoString) return 'Encara no hi ha accions registrades';
-    const date = new Date(isoString);
-    return date.toLocaleString('ca-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
   if (loading) {
     return (
       <div style={containerStyle}>
@@ -114,8 +102,6 @@ const ProfilePage = () => {
         <p><strong>Usuari:</strong> {user.username}</p>
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Rol:</strong> {user.role}</p>
-        <p><strong>Creat el:</strong> {formatDate(user.createdAt)}</p>
-        <p><strong>Última acció amb mascota:</strong> {formatDate(user.lastPetAction)}</p>
 
         <button className="delete-button" onClick={handleDeleteAccount}>
           🗑️ Eliminar compte

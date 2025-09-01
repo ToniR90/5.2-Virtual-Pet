@@ -149,16 +149,6 @@ public class AdminController {
         return ResponseEntity.ok(ApiResponse.success("Nombre de mascotes", count));
     }
 
-    @PutMapping("/roles/{userId}/toggle")
-    public ResponseEntity<ApiResponse<UserResponse>> toggleUserRole(@PathVariable Long userId) {
-        UserResponse targetUser = adminService.getUserById(userId);
-
-        Role newRole = targetUser.getRole() == Role.ROLE_USER ? Role.ROLE_ADMIN : Role.ROLE_USER;
-        targetUser.setRole(newRole);
-
-        return ResponseEntity.ok(ApiResponse.success("Rol actualitzat", targetUser));
-    }
-
     @GetMapping("/dashboard")
     public ResponseEntity<ApiResponse<AdminDashboard>> getDashboard() {
         logger.info("Admin getting dashboard statistics");

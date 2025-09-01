@@ -61,10 +61,6 @@ const AdminUsersPage = () => {
     return false;
   };
 
-  const canChangeRole = (targetRole) => {
-    return currentUser?.role === 'ROLE_SUPER_ADMIN' && targetRole !== 'ROLE_SUPER_ADMIN';
-  };
-
   const handleDelete = async (userId) => {
     const token = getToken();
     try {
@@ -81,28 +77,6 @@ const AdminUsersPage = () => {
       }
     } catch (err) {
       console.error('Error eliminant usuari:', err);
-      setMessage('❌ Error inesperat');
-    }
-  };
-
-  const handleRoleChange = async (userId) => {
-    const token = getToken();
-    try {
-      const res = await fetch(`http://localhost:8080/api/admin/roles/${userId}/toggle`, {
-        method: 'PUT',
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const result = await res.json();
-      if (res.ok) {
-        setUsers(prev =>
-          prev.map(u => (u.id === userId ? { ...u, role: result.data.role } : u))
-        );
-        setMessage('🔄 Rol modificat correctament');
-      } else {
-        setMessage('❌ Error: ' + (result.message || 'Error inesperat'));
-      }
-    } catch (err) {
-      console.error('Error canviant rol:', err);
       setMessage('❌ Error inesperat');
     }
   };
@@ -138,9 +112,6 @@ const AdminUsersPage = () => {
               <div className="actions">
                 {canDelete(user.role) && (
                   <button onClick={() => handleDelete(user.id)}>🗑️ Eliminar</button>
-                )}
-                {canChangeRole(user.role) && (
-                  <button onClick={() => handleRoleChange(user.id)}>🔄 Canviar rol</button>
                 )}
               </div>
             </div>
