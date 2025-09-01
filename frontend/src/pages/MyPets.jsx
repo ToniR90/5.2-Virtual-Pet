@@ -4,9 +4,9 @@ import dashboardBg from '../assets/dashboard.jpg'; // Imatge de fons
 import './MyPets.css';
 
 // Obté el sprite segons tipus i etapa
-const getSpritePath = (type, stage) => {
+const getSpritePath = (variant, stage) => {
   try {
-    return require(`../assets/sprites/${type}-${stage}.png`);
+    return require(`../assets/sprites/${variant}-${stage}.png`);
   } catch {
     return null;
   }
@@ -52,7 +52,7 @@ const MyPets = () => {
         {!loading && pets.length === 0 && <p>Encara no tens cap mascota 🐾</p>}
         <div className="pets-grid">
           {pets.map(pet => {
-            const spritePath = getSpritePath(pet.type, pet.stage);
+            const spritePath = getSpritePath(pet.variant, pet.stage);
             return (
               <div key={pet.id} className="pet-card">
                 {spritePath && (

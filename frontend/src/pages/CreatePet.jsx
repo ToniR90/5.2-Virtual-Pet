@@ -3,44 +3,49 @@ import { useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
 import './CreatePet.css';
 import createBg from '../assets/creation.jpg';
-import eggMountain from '../assets/sprites/egg-mountain.png';
-import eggSwamp from '../assets/sprites/egg-swamp.png';
-import eggForest from '../assets/sprites/egg-forest.png';
+import eggMountain from '../assets/sprites/MOUNTAIN-EGG.png';
+import eggSwamp from '../assets/sprites/SWAMP-EGG.png';
+import eggForest from '../assets/sprites/FOREST-EGG.png';
 
 const eggOptions = [
-  { type: 'mountain', label: 'Drac de Muntanya', sprite: eggMountain },
-  { type: 'swamp', label: 'Drac de Pantà', sprite: eggSwamp },
-  { type: 'forest', label: 'Drac de Bosc', sprite: eggForest },
+  { variant: 'MOUNTAIN', label: 'Drac de Muntanya', sprite: eggMountain },
+  { variant: 'SWAMP', label: 'Drac de Pantà', sprite: eggSwamp },
+  { variant: 'FOREST', label: 'Drac de Bosc', sprite: eggForest },
 ];
 
 const CreatePet = () => {
-  const [selectedType, setSelectedType] = useState(null);
+  const [selectedVariant, setSelectedVariant] = useState(null);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleCreate = () => {
-    if (!selectedType || !name.trim()) {
+    console.log('🧪 selectedVariant:', selectedVariant);
+    console.log('🧪 name:', name);
+
+    if (!selectedVariant || !name.trim()) {
       setError('Has de seleccionar un ou i escriure un nom!');
       return;
     }
 
     const token = getToken();
+    console.log('🔧 Creant mascota:', { name, variant: selectedVariant });
+
     fetch('http://localhost:8080/api/pets', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name, type: selectedType }),
+      body: JSON.stringify({ name, variant: selectedVariant }),
     })
       .then(res => res.json())
       .then(data => {
-        console.log('Mascota creada:', data);
+        console.log('✅ Mascota creada:', data);
         navigate('/pets');
       })
       .catch(err => {
-        console.error('Error creant mascota:', err);
+        console.error('❌ Error creant mascota:', err);
         setError('No s’ha pogut crear la mascota');
       });
   };
@@ -66,9 +71,12 @@ const CreatePet = () => {
         <div className="egg-selection">
           {eggOptions.map(egg => (
             <div
-              key={egg.type}
-              className={`egg-card ${selectedType === egg.type ? 'selected' : ''}`}
-              onClick={() => setSelectedType(egg.type)}
+              key={egg.variant}
+              className={`egg-card ${selectedVariant === egg.variant ? 'selected' : ''}`}
+              onClick={() => {
+                console.log('✅ Ou seleccionat:', egg.variant);
+                setSelectedVariant(egg.variant);
+              }}
             >
               <img src={egg.sprite} alt={egg.label} className="egg-sprite" />
               <p>{egg.label}</p>

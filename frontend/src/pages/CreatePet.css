@@ -2,11 +2,11 @@
   padding: 2rem;
   color: white;
   text-align: center;
-  background-color: transparent; /* 👈 Totalment transparent */
+  background-color: transparent; /* Totalment transparent */
   max-width: 700px;
   margin: 2rem auto;
-  border-radius: 0; /* 👈 Elimina corbes si vols */
-  box-shadow: none; /* 👈 Elimina ombra */
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .egg-selection {
