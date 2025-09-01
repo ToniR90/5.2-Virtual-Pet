@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
 import dashboardBg from '../assets/dashboard.jpg';
-import './MyPets.css'; // reutilitzem els estils
+import './MyPets.css';
 
 const getSpritePath = (variant, stage) => {
   try {
@@ -22,21 +22,19 @@ const PetDetail = () => {
   useEffect(() => {
     const token = getToken();
 
-    // Carrega mascota
     fetch(`http://localhost:8080/api/pets/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => {
-        if (!res.ok) throw new Error('Mascota no trobada o accés denegat');
+        if (!res.ok) throw new Error('Pet not found or access denied');
         return res.json();
       })
       .then(data => setPet(data.data))
       .catch(err => {
         console.error(err);
-        setError('❌ No s’ha pogut carregar la mascota');
+        setError('❌ Failed to load pet');
       });
 
-    // Carrega usuari actual
     fetch('http://localhost:8080/api/user/me', {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -45,7 +43,7 @@ const PetDetail = () => {
   }, [id]);
 
   const handleDelete = async () => {
-    const confirm = window.confirm('Estàs segur que vols eliminar aquesta mascota?');
+    const confirm = window.confirm('Are you sure you want to remove this pet?');
     if (!confirm) return;
 
     const token = getToken();
@@ -58,10 +56,10 @@ const PetDetail = () => {
       if (res.ok) {
         navigate('/dashboard');
       } else {
-        console.error('❌ No s’ha pogut eliminar la mascota');
+        console.error('❌ The pet could not be removed');
       }
     } catch (err) {
-      console.error('❌ Error eliminant mascota:', err);
+      console.error('❌ Error deleting pet:', err);
     }
   };
 
@@ -78,7 +76,7 @@ const PetDetail = () => {
     return (
       <div style={containerStyle}>
         <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Tornar
+          ← Back
         </button>
         <div className="pets-box">
           <p className="error-message">{error}</p>
@@ -91,10 +89,10 @@ const PetDetail = () => {
     return (
       <div style={containerStyle}>
         <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Tornar
+          ← Back
         </button>
         <div className="pets-box">
-          <p>Carregant mascota...</p>
+          <p>Loading pet...</p>
         </div>
       </div>
     );
@@ -107,11 +105,11 @@ const PetDetail = () => {
   return (
     <div style={containerStyle}>
       <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Tornar
+        ← Back
       </button>
 
       <div className="pets-box">
-        <h2>🎮 Interacció amb {pet.name}</h2>
+        <h2>🎮 Interaction with {pet.name}</h2>
         <div className="pets-grid">
           <div className="pet-card">
             {spritePath && (
@@ -123,12 +121,12 @@ const PetDetail = () => {
             {isAdmin && !isOwner && (
               <p><strong>Propietari:</strong> {pet.ownerUsername}</p>
             )}
-            <button className="select-button" onClick={() => alert('Acció de selecció')}>
+            <button className="select-button" onClick={() => alert('Selection action')}>
               Select
             </button>
             {(isOwner || isAdmin) && (
               <button className="delete-button" onClick={handleDelete}>
-                🗑️ Eliminar
+                🗑️ Delete
               </button>
             )}
           </div>
