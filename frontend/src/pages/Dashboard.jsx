@@ -59,8 +59,8 @@ const Dashboard = () => {
         {isAdmin && (
           <>
             <hr />
-            <button onClick={() => navigate('/admin/users')}>👥 View All Users</button>
-            <button onClick={() => navigate('/admin/pets')}>🐾 View All Pets</button>
+            <button onClick={() => navigate('/admin/users')}>👥 View All Users 👥</button>
+            <button onClick={() => navigate('/admin/pets')}>🐾 View All Pets 🐾</button>
           </>
         )}
 
