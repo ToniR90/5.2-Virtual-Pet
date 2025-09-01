@@ -7,6 +7,7 @@ import EditProfile from './pages/EditProfile';
 import AdminUsersPage from './pages/AdminUsersPage';
 import GoodbyePage from './pages/GoodbyePage';
 import MyPets from './pages/MyPets'; // ✅ Importa la nova vista
+import CreatePet from './pages/CreatePet';
 import PrivateRoute from './components/PrivateRoute'; // ✅ Protegeix rutes privades
 
 function App() {
@@ -57,6 +58,14 @@ function App() {
         <Route
           path="/goodbye"
           element={<GoodbyePage />}
+        />
+        <Route
+          path="/pets/create"
+          element={
+            <PrivateRoute>
+              <CreatePet />
+            </PrivateRoute>
+          }
         />
       </Routes>
     </BrowserRouter>

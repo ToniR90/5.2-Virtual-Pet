@@ -1,0 +1,71 @@
+.create-pet-container {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  background-color: transparent; /* 👈 Totalment transparent */
+  max-width: 700px;
+  margin: 2rem auto;
+  border-radius: 0; /* 👈 Elimina corbes si vols */
+  box-shadow: none; /* 👈 Elimina ombra */
+}
+
+.egg-selection {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.egg-card {
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.egg-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.egg-card.selected {
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 15px rgba(0,255,200,0.5);
+}
+
+.egg-sprite {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.pet-name-input {
+  padding: 0.6rem;
+  width: 60%;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.create-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #2c2c2c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.create-button:hover {
+  background-color: #444;
+}
+
+.error-msg {
+  color: #ff6666;
+  margin-bottom: 1rem;
+}
