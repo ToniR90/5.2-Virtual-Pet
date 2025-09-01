@@ -84,6 +84,9 @@ const ProfilePage = () => {
   if (loading) {
     return (
       <div style={containerStyle}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>
+          ← Tornar
+        </button>
         <div className="profile-box">Carregant perfil...</div>
       </div>
     );
@@ -92,6 +95,9 @@ const ProfilePage = () => {
   if (!user) {
     return (
       <div style={containerStyle}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>
+          ← Tornar
+        </button>
         <div className="profile-box">No s’ha pogut carregar el perfil.</div>
       </div>
     );
@@ -99,6 +105,10 @@ const ProfilePage = () => {
 
   return (
     <div style={containerStyle}>
+      <button className="back-button" onClick={() => navigate('/dashboard')}>
+        ← Tornar
+      </button>
+
       <div className="profile-box">
         <h2>👤 Perfil</h2>
         <p><strong>Usuari:</strong> {user.username}</p>

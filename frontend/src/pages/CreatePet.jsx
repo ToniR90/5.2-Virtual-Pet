@@ -61,6 +61,11 @@ const CreatePet = () => {
 
   return (
     <div style={containerStyle}>
+      {/* Botó fixat a dalt a l'esquerra */}
+      <button className="back-button" onClick={() => navigate('/dashboard')}>
+        ← Tornar
+      </button>
+
       <div className="create-pet-container">
         <h2>🐣 Crea la teva mascota</h2>
         <p>Selecciona un ou i escriu el nom del teu drac</p>
