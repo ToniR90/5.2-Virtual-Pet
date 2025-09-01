@@ -29,14 +29,14 @@ const MyPets = () => {
         setLoading(false);
       })
       .catch(err => {
-        console.error('Error carregant mascotes:', err);
-        setMessage('❌ No s’han pogut carregar les mascotes');
+        console.error('Error loading pets:', err);
+        setMessage('❌ Pets could not be loaded');
         setLoading(false);
       });
   }, []);
 
   const handleDelete = async (petId) => {
-    const confirm = window.confirm('Estàs segur que vols eliminar aquesta mascota?');
+    const confirm = window.confirm('Are you sure you want to remove this pet?');
     if (!confirm) return;
 
     const token = getToken();
@@ -49,10 +49,10 @@ const MyPets = () => {
       if (res.ok) {
         setPets(prev => prev.filter(p => p.id !== petId));
       } else {
-        console.error('❌ No s’ha pogut eliminar la mascota');
+        console.error('❌ The pet could not be removed');
       }
     } catch (err) {
-      console.error('❌ Error eliminant mascota:', err);
+      console.error('❌ Error deleting pet:', err);
     }
   };
 
@@ -68,14 +68,14 @@ const MyPets = () => {
   return (
     <div style={containerStyle}>
       <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Tornar
+        ← Back
       </button>
 
       <div className="pets-box">
-        <h2>🐾 Les meves mascotes</h2>
-        {loading && <p>Carregant mascotes...</p>}
+        <h2>🐾 My pets 🐾</h2>
+        {loading && <p>Loading pets...</p>}
         {message && <p>{message}</p>}
-        {!loading && pets.length === 0 && <p>Encara no tens cap mascota 🐾</p>}
+        {!loading && pets.length === 0 && <p>You don't have any pets yet</p>}
         <div className="pets-grid">
           {pets.map(pet => {
             const spritePath = getSpritePath(pet.variant, pet.stage);
@@ -99,7 +99,7 @@ const MyPets = () => {
                   className="delete-button"
                   onClick={() => handleDelete(pet.id)}
                 >
-                  🗑️ Eliminar
+                  🗑️ Delete
                 </button>
               </div>
             );
