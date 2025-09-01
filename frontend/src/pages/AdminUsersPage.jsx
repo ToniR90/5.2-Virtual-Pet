@@ -17,14 +17,12 @@ const AdminUsersPage = () => {
       return;
     }
 
-    // Carrega usuari actual
     fetch('http://localhost:8080/api/user/me', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
       .then(data => setCurrentUser(data.data));
 
-    // Carrega usuaris
     fetch('http://localhost:8080/api/admin/users', {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -33,7 +31,6 @@ const AdminUsersPage = () => {
         const loadedUsers = data.data;
         setUsers(loadedUsers);
 
-        // Per cada usuari, demana el nombre de mascotes
         loadedUsers.forEach(user => {
           fetch(`http://localhost:8080/api/admin/users/${user.id}/pet-count`, {
             headers: { Authorization: `Bearer ${getToken()}` },
@@ -49,7 +46,7 @@ const AdminUsersPage = () => {
         });
       })
       .catch(err => {
-        console.error('Error carregant usuaris:', err);
+        console.error('Error loading users:', err);
         navigate('/');
       });
   }, [navigate]);
@@ -70,14 +67,14 @@ const AdminUsersPage = () => {
       });
       if (res.ok) {
         setUsers(prev => prev.filter(u => u.id !== userId));
-        setMessage('✅ Usuari eliminat correctament');
+        setMessage('✅ User deleted successfully');
       } else {
         const result = await res.json();
-        setMessage('❌ Error: ' + (result.message || 'Error inesperat'));
+        setMessage('❌ Error: ' + (result.message || 'Unexpected error'));
       }
     } catch (err) {
-      console.error('Error eliminant usuari:', err);
-      setMessage('❌ Error inesperat');
+      console.error('Error deleting user:', err);
+      setMessage('❌ Unexpected error');
     }
   };
 
@@ -94,11 +91,11 @@ const AdminUsersPage = () => {
   return (
     <div style={containerStyle}>
       <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Tornar
+        ← Back
       </button>
 
       <div className="admin-users-container">
-        <h2>👥 Gestió d'usuaris</h2>
+        <h2>👥 Users management 👥</h2>
         {message && <p className="message">{message}</p>}
 
         <div className="users-grid">
@@ -111,7 +108,7 @@ const AdminUsersPage = () => {
 
               <div className="actions">
                 {canDelete(user.role) && (
-                  <button onClick={() => handleDelete(user.id)}>🗑️ Eliminar</button>
+                  <button onClick={() => handleDelete(user.id)}>🗑️ Delete</button>
                 )}
               </div>
             </div>
