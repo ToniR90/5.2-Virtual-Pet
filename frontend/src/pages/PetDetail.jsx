@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
-import dashboardBg from '../assets/dashboard.jpg';
-import './MyPets.css';
+import './PetDetail.css';
 
 const getSpritePath = (variant, stage) => {
   try {
@@ -12,10 +11,19 @@ const getSpritePath = (variant, stage) => {
   }
 };
 
+const getBackgroundForVariant = (variant) => {
+  try {
+    return require(`../assets/${variant.toLowerCase()}.jpg`);
+  } catch {
+    return null;
+  }
+};
+
 const PetDetail = () => {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
@@ -42,96 +50,81 @@ const PetDetail = () => {
       .then(data => setCurrentUser(data.data));
   }, [id]);
 
-  const handleDelete = async () => {
-    const confirm = window.confirm('Are you sure you want to remove this pet?');
-    if (!confirm) return;
-
+  const handleAction = async (action) => {
     const token = getToken();
     try {
-      const res = await fetch(`http://localhost:8080/api/pets/${id}`, {
-        method: 'DELETE',
+      const res = await fetch(`http://localhost:8080/api/pets/${id}/${action}`, {
+        method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
-
+      const result = await res.json();
       if (res.ok) {
-        navigate('/dashboard');
+        setPet(result.data);
+        setMessage(`✅ ${action} completed`);
       } else {
-        console.error('❌ The pet could not be removed');
+        setMessage(`❌ ${result.message || 'Action failed'}`);
       }
     } catch (err) {
-      console.error('❌ Error deleting pet:', err);
+      console.error('❌ Error performing action:', err);
+      setMessage('❌ Unexpected error');
     }
   };
 
-  const containerStyle = {
-    backgroundImage: `url(${dashboardBg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    minHeight: '100vh',
-    paddingTop: '2rem',
-  };
+  const isOwner = currentUser?.username === pet?.ownerUsername;
+  const spritePath = pet ? getSpritePath(pet.variant, pet.stage) : null;
+  const backgroundImage = pet ? getBackgroundForVariant(pet.variant) : null;
 
   if (error) {
     return (
-      <div style={containerStyle}>
-        <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Back
-        </button>
-        <div className="pets-box">
+      <div className="pet-detail-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>← Back</button>
+        <div className="pet-stats-box">
           <p className="error-message">{error}</p>
         </div>
       </div>
     );
   }
 
-  if (!pet) {
+  if (!pet || !currentUser) {
     return (
-      <div style={containerStyle}>
-        <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Back
-        </button>
-        <div className="pets-box">
+      <div className="pet-detail-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>← Back</button>
+        <div className="pet-stats-box">
           <p>Loading pet...</p>
         </div>
       </div>
     );
   }
 
-  const spritePath = getSpritePath(pet.variant, pet.stage);
-  const isOwner = currentUser?.username === pet.ownerUsername;
-  const isAdmin = currentUser?.role === 'ROLE_ADMIN' || currentUser?.role === 'ROLE_SUPER_ADMIN';
-
   return (
-    <div style={containerStyle}>
-      <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Back
-      </button>
+    <div className="pet-detail-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <button className="back-button" onClick={() => navigate('/dashboard')}>← Back</button>
 
-      <div className="pets-box">
-        <h2>🎮 Interaction with {pet.name}</h2>
-        <div className="pets-grid">
-          <div className="pet-card">
-            {spritePath && (
-              <img src={spritePath} alt={`${pet.name} sprite`} className="pet-sprite" />
-            )}
-            <h3>{pet.name}</h3>
-            <p><strong>Variant:</strong> {pet.variant}</p>
-            <p><strong>Estat:</strong> {pet.stage}</p>
-            {isAdmin && !isOwner && (
-              <p><strong>Propietari:</strong> {pet.ownerUsername}</p>
-            )}
-            <button className="select-button" onClick={() => alert('Selection action')}>
-              Select
-            </button>
-            {(isOwner || isAdmin) && (
-              <button className="delete-button" onClick={handleDelete}>
-                🗑️ Delete
-              </button>
-            )}
-          </div>
-        </div>
+      {spritePath && (
+        <img src={spritePath} alt={`${pet.name} sprite`} className="pet-detail-sprite" />
+      )}
+
+      <div className="pet-stats-box">
+        <h3>{pet.name}</h3>
+        <p><strong>Variant:</strong> {pet.variant}</p>
+        <p><strong>Stage:</strong> {pet.stage}</p>
+        <hr />
+        <p><strong>Experience:</strong> {pet.experience}</p>
+        <p><strong>Energy:</strong> {pet.energy}</p>
+        <p><strong>Happiness:</strong> {pet.happiness}</p>
+        <p><strong>Hunger:</strong> {pet.hunger}</p>
       </div>
+
+      {isOwner && (
+        <div className="pet-actions-box">
+          <button onClick={() => handleAction('play')}>🎾 Play</button>
+          <button onClick={() => handleAction('feed')}>🍖 Feed</button>
+          <button onClick={() => handleAction('rest')}>💤 Rest</button>
+          <button onClick={() => handleAction('ignore')}>🙈 Ignore</button>
+        </div>
+      )}
+
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

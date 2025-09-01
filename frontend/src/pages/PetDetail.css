@@ -1,29 +1,74 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.pet-detail-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .pet-detail-sprite {
-  width: 400px;
-  height: 400px;
+  max-width: 250px;
+  max-height: 250px;
   object-fit: contain;
   margin-bottom: 1rem;
 }
 
-.pet-stats {
-  background-color: rgba(0, 0, 0, 0.4);
+.pet-stats-box {
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 1rem 2rem;
   border-radius: 12px;
+  color: white;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
   margin-bottom: 1rem;
-  text-align: left;
 }
 
-.pet-actions button {
-  margin: 0.5rem;
-  padding: 0.6rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: black;
-  border: 1px solid white;
+.pet-actions-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.pet-actions-box button {
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid white;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.pet-actions button:hover {
+.pet-actions-box button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.message {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
 }
