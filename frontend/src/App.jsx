@@ -6,9 +6,10 @@ import ProfilePage from './pages/ProfilePage';
 import EditProfile from './pages/EditProfile';
 import AdminUsersPage from './pages/AdminUsersPage';
 import GoodbyePage from './pages/GoodbyePage';
-import MyPets from './pages/MyPets'; // ✅ Importa la nova vista
+import MyPets from './pages/MyPets';
 import CreatePet from './pages/CreatePet';
-import PrivateRoute from './components/PrivateRoute'; // ✅ Protegeix rutes privades
+import PetDetail from './pages/PetDetail'; // ✅ Nova vista detallada
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -56,10 +57,6 @@ function App() {
           }
         />
         <Route
-          path="/goodbye"
-          element={<GoodbyePage />}
-        />
-        <Route
           path="/pets/create"
           element={
             <PrivateRoute>
@@ -67,6 +64,15 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/pets/:id"
+          element={
+            <PrivateRoute>
+              <PetDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/goodbye" element={<GoodbyePage />} />
       </Routes>
     </BrowserRouter>
   );
