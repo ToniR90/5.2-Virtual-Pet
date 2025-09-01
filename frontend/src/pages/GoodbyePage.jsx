@@ -25,7 +25,7 @@ const GoodbyePage = () => {
       </div>
 
       <button className="return-button" onClick={() => navigate('/')}>
-        🔁 Tornar a l'inici
+        🔁 Back to login page
       </button>
     </div>
   );
