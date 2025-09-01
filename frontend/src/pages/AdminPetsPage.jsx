@@ -31,6 +31,7 @@ const AdminPetsPage = () => {
   }, [navigate]);
 
   const handleDelete = async (petId) => {
+    console.log('Deleting pet with ID:', petId); // afegit
     const token = getToken();
     try {
       const res = await fetch(`http://localhost:8080/api/admin/pets/${petId}`, {
@@ -63,7 +64,6 @@ const AdminPetsPage = () => {
     overflow: 'hidden',
     paddingTop: '2rem',
     color: 'white',
-    zIndex: -1,
   };
 
   return (
