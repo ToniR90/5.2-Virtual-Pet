@@ -70,3 +70,19 @@
 .select-button:hover {
   background-color: #444;
 }
+
+.delete-button {
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #a30000;
+}

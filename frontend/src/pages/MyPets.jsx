@@ -35,6 +35,27 @@ const MyPets = () => {
       });
   }, []);
 
+  const handleDelete = async (petId) => {
+    const confirm = window.confirm('Estàs segur que vols eliminar aquesta mascota?');
+    if (!confirm) return;
+
+    const token = getToken();
+    try {
+      const res = await fetch(`http://localhost:8080/api/pets/${petId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        setPets(prev => prev.filter(p => p.id !== petId));
+      } else {
+        console.error('❌ No s’ha pogut eliminar la mascota');
+      }
+    } catch (err) {
+      console.error('❌ Error eliminant mascota:', err);
+    }
+  };
+
   const containerStyle = {
     backgroundImage: `url(${dashboardBg})`,
     backgroundSize: 'cover',
@@ -46,7 +67,6 @@ const MyPets = () => {
 
   return (
     <div style={containerStyle}>
-      {/* Botó fora del contenidor principal */}
       <button className="back-button" onClick={() => navigate('/dashboard')}>
         ← Tornar
       </button>
@@ -69,7 +89,18 @@ const MyPets = () => {
                   />
                 )}
                 <h3>{pet.name}</h3>
-                <button className="select-button">Select</button>
+                <button
+                  className="select-button"
+                  onClick={() => navigate(`/pets/${pet.id}`)}
+                >
+                  Select
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(pet.id)}
+                >
+                  🗑️ Eliminar
+                </button>
               </div>
             );
           })}

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
 import './PetDetail.css';
-import bgMountain from '../assets/backgrounds/mountain.jpg';
-import bgSwamp from '../assets/backgrounds/swamp.jpg';
-import bgForest from '../assets/backgrounds/forest.jpg';
+import bgMountain from '../assets/mountain.jpg';
+import bgSwamp from '../assets/swamp.jpg';
+import bgForest from '../assets/forest.jpg';
 
 const backgrounds = {
   MOUNTAIN: bgMountain,
@@ -44,7 +44,7 @@ const PetDetail = () => {
     color: 'white',
   };
 
-  const spritePath = require(`../assets/sprites/${pet.variant.toLowerCase()}-${pet.stage.toLowerCase()}.png`);
+  const spritePath = require(`../assets/sprites/${pet.variant}-${pet.stage}.png`);
 
   return (
     <div style={bgStyle}>
@@ -56,10 +56,9 @@ const PetDetail = () => {
       <div className="pet-stats">
         <p><strong>Variant:</strong> {pet.variant}</p>
         <p><strong>Etapa:</strong> {pet.stage}</p>
-        <p><strong>Nivell:</strong> {pet.level}</p>
+        <p><strong>Experiencia:</strong> {pet.experience}</p>
         <p><strong>Energia:</strong> {pet.energy}</p>
         <p><strong>Felicitat:</strong> {pet.happiness}</p>
-        <p><strong>Vincle:</strong> {pet.bond}</p>
       </div>
 
       <div className="pet-actions">
