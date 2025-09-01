@@ -12,7 +12,7 @@ const AuthPage = () => {
 
   const containerStyle = {
     backgroundImage: `url(${background})`,
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundColor: 'black',

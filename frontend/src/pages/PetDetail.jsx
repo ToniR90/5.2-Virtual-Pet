@@ -1,89 +1,141 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
-import './PetDetail.css';
-import bgMountain from '../assets/mountain.jpg';
-import bgSwamp from '../assets/swamp.jpg';
-import bgForest from '../assets/forest.jpg';
+import dashboardBg from '../assets/dashboard.jpg';
+import './MyPets.css'; // reutilitzem els estils
 
-const backgrounds = {
-  MOUNTAIN: bgMountain,
-  SWAMP: bgSwamp,
-  FOREST: bgForest,
+const getSpritePath = (variant, stage) => {
+  try {
+    return require(`../assets/sprites/${variant}-${stage}.png`);
+  } catch {
+    return null;
+  }
 };
 
 const PetDetail = () => {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
+  const [error, setError] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = getToken();
+
+    // Carrega mascota
     fetch(`http://localhost:8080/api/pets/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Mascota no trobada o accés denegat');
+        return res.json();
+      })
       .then(data => setPet(data.data))
       .catch(err => {
-        console.error('Error carregant mascota:', err);
-        navigate('/pets');
+        console.error(err);
+        setError('❌ No s’ha pogut carregar la mascota');
       });
-  }, [id, navigate]);
 
-  if (!pet) return null;
-
-  const bgStyle = {
-    backgroundImage: `url(${backgrounds[pet.variant]})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: '3rem',
-    color: 'white',
-  };
-
-  const spritePath = require(`../assets/sprites/${pet.variant}-${pet.stage}.png`);
-
-  return (
-    <div style={bgStyle}>
-      <button className="back-button" onClick={() => navigate('/pets')}>← Tornar</button>
-
-      <img src={spritePath} alt={pet.name} className="pet-detail-sprite" />
-      <h2>{pet.name}</h2>
-
-      <div className="pet-stats">
-        <p><strong>Variant:</strong> {pet.variant}</p>
-        <p><strong>Etapa:</strong> {pet.stage}</p>
-        <p><strong>Experiencia:</strong> {pet.experience}</p>
-        <p><strong>Energia:</strong> {pet.energy}</p>
-        <p><strong>Felicitat:</strong> {pet.happiness}</p>
-        <p><strong>Saciedad:</strong> {pet.hunger}</p>
-      </div>
-
-      <div className="pet-actions">
-        <button onClick={() => handleAction('play')}>🎮 Jugar</button>
-        <button onClick={() => handleAction('feed')}>🍗 Alimentar</button>
-        <button onClick={() => handleAction('rest')}>🛌 Descansar</button>
-        <button onClick={() => handleAction('ignore')}>🙈 Ignorar</button>
-      </div>
-    </div>
-  );
-
-  function handleAction(action) {
-    const token = getToken();
-    fetch(`http://localhost:8080/api/pets/${id}/${action}`, {
-      method: 'POST',
+    // Carrega usuari actual
+    fetch('http://localhost:8080/api/user/me', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
-      .then(data => {
-        console.log(`✅ Acció ${action} feta:`, data);
-        setPet(data.data); // actualitza els stats
-      })
-      .catch(err => console.error(`❌ Error amb acció ${action}:`, err));
+      .then(data => setCurrentUser(data.data));
+  }, [id]);
+
+  const handleDelete = async () => {
+    const confirm = window.confirm('Estàs segur que vols eliminar aquesta mascota?');
+    if (!confirm) return;
+
+    const token = getToken();
+    try {
+      const res = await fetch(`http://localhost:8080/api/pets/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        navigate('/dashboard');
+      } else {
+        console.error('❌ No s’ha pogut eliminar la mascota');
+      }
+    } catch (err) {
+      console.error('❌ Error eliminant mascota:', err);
+    }
+  };
+
+  const containerStyle = {
+    backgroundImage: `url(${dashboardBg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+    paddingTop: '2rem',
+  };
+
+  if (error) {
+    return (
+      <div style={containerStyle}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>
+          ← Tornar
+        </button>
+        <div className="pets-box">
+          <p className="error-message">{error}</p>
+        </div>
+      </div>
+    );
   }
+
+  if (!pet) {
+    return (
+      <div style={containerStyle}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>
+          ← Tornar
+        </button>
+        <div className="pets-box">
+          <p>Carregant mascota...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const spritePath = getSpritePath(pet.variant, pet.stage);
+  const isOwner = currentUser?.username === pet.ownerUsername;
+  const isAdmin = currentUser?.role === 'ROLE_ADMIN' || currentUser?.role === 'ROLE_SUPER_ADMIN';
+
+  return (
+    <div style={containerStyle}>
+      <button className="back-button" onClick={() => navigate('/dashboard')}>
+        ← Tornar
+      </button>
+
+      <div className="pets-box">
+        <h2>🎮 Interacció amb {pet.name}</h2>
+        <div className="pets-grid">
+          <div className="pet-card">
+            {spritePath && (
+              <img src={spritePath} alt={`${pet.name} sprite`} className="pet-sprite" />
+            )}
+            <h3>{pet.name}</h3>
+            <p><strong>Variant:</strong> {pet.variant}</p>
+            <p><strong>Estat:</strong> {pet.stage}</p>
+            {isAdmin && !isOwner && (
+              <p><strong>Propietari:</strong> {pet.ownerUsername}</p>
+            )}
+            <button className="select-button" onClick={() => alert('Acció de selecció')}>
+              Select
+            </button>
+            {(isOwner || isAdmin) && (
+              <button className="delete-button" onClick={handleDelete}>
+                🗑️ Eliminar
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default PetDetail;

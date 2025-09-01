@@ -55,7 +55,7 @@ const AdminPetsPage = () => {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    position: 'fixed', // 👈 ocupa tota la pantalla
+    position: 'fixed',
     top: 0,
     left: 0,
     width: '100vw',
@@ -68,38 +68,39 @@ const AdminPetsPage = () => {
 
   return (
     <div style={containerStyle}>
-      <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Tornar
-      </button>
+      <div style={{ position: 'relative', zIndex: 1, height: '100vh', overflowY: 'auto' }}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>
+          ← Tornar
+        </button>
 
-      <div className="admin-pets-container">
-        <h2>🐾 Gestió de mascotes</h2>
-        {message && <p className="message">{message}</p>}
+        <div className="admin-pets-container">
+          <h2>🐾 Gestió de mascotes</h2>
+          {message && <p className="message">{message}</p>}
 
-        <div className="pets-grid">
-          {pets.map(pet => {
-            const spritePath = getSpritePath(pet.variant, pet.stage);
-            return (
-              <div key={pet.id} className="pet-card">
-                {spritePath && (
-                  <img
-                    src={spritePath}
-                    alt={`Sprite de ${pet.name}`}
-                    className="pet-sprite"
-                  />
-                )}
-                <h3>{pet.name}</h3>
-                <p><strong>Propietari:</strong> {pet.ownerUsername}</p>
-                <p><strong>Variant:</strong> {pet.variant}</p>
-                <p><strong>Estat:</strong> {pet.stage}</p>
+          <div className="pets-grid">
+            {pets.map(pet => {
+              const spritePath = getSpritePath(pet.variant, pet.stage);
+              return (
+                <div key={pet.id} className="pet-card">
+                  {spritePath && (
+                    <img
+                      src={spritePath}
+                      alt={`Sprite de ${pet.name}`}
+                      className="pet-sprite"
+                    />
+                  )}
+                  <h3>{pet.name}</h3>
+                  <p><strong>Propietari:</strong> {pet.ownerUsername}</p>
+                  <p><strong>Variant:</strong> {pet.variant}</p>
+                  <p><strong>Estat:</strong> {pet.stage}</p>
 
-                <div className="actions">
-                  <button onClick={() => navigate(`/pets/${pet.id}`)}>🎮 Interactuar</button>
-                  <button onClick={() => handleDelete(pet.id)}>🗑️ Eliminar</button>
+                  <div className="actions">
+                    <button onClick={() => handleDelete(pet.id)}>🗑️ Eliminar</button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
