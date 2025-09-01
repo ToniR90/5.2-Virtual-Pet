@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+/*import React, { useEffect, useState, useCallback } from 'react';
 import { getToken, clearToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import profileBg from '../assets/profile.jpg';
@@ -14,32 +14,40 @@ const EditProfile = () => {
     confirmPassword: '',
   });
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const loadUser = useCallback(async () => {
     const token = getToken();
-    if (!token) {
-      navigate('/');
-      return;
-    }
+    try {
+      const res = await fetch('http://localhost:8080/api/user/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      console.log('🔍 Resposta de /api/user/me:', data);
 
-    fetch('http://localhost:8080/api/user/me', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then(res => res.json())
-      .then(data => {
+      if (res.ok && data && data.data) {
         setUser(data.data);
         setFormData(prev => ({
           ...prev,
-          username: data.data.username,
-          email: data.data.email,
+          username: data.data.username || '',
+          email: data.data.email || '',
         }));
-      })
-      .catch(err => {
-        console.error('Error fetching profile:', err);
-        navigate('/');
-      });
-  }, [navigate]);
+        setMessage('');
+      } else {
+        setMessage('❌ ' + (data.message || 'No s’ha pogut carregar el perfil'));
+      }
+    } catch (err) {
+      console.error('Error carregant perfil:', err);
+      setMessage('❌ Error inesperat en carregar el perfil');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -78,12 +86,18 @@ const EditProfile = () => {
       const result = await response.json();
       if (response.ok) {
         setMessage('✅ Perfil actualitzat correctament');
-        navigate('/profile');
+
+        // 🔐 Guarda el nou token si el backend el retorna
+        if (result.data && result.data.token) {
+          localStorage.setItem('token', result.data.token);
+        }
+
+        loadUser(); // ✅ Recarrega el perfil amb el token actualitzat
       } else {
         setMessage('❌ Error: ' + result.message);
       }
     } catch (err) {
-      console.error('Error updating profile:', err);
+      console.error('Error actualitzant perfil:', err);
       setMessage('❌ Error inesperat');
     }
   };
@@ -101,13 +115,13 @@ const EditProfile = () => {
 
       if (res.ok) {
         clearToken();
-        navigate('/goodbye'); // ✅ Redirecció a la pantalla de comiat
+        navigate('/goodbye');
       } else {
         const result = await res.json();
         setMessage('❌ Error: ' + result.message);
       }
     } catch (err) {
-      console.error('Error deleting account:', err);
+      console.error('Error eliminant compte:', err);
       setMessage('❌ Error inesperat');
     }
   };
@@ -125,10 +139,18 @@ const EditProfile = () => {
     position: 'relative',
   };
 
-  if (!user) {
+  if (loading) {
     return (
       <div style={containerStyle}>
         <div className="edit-box">Carregant perfil...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div style={containerStyle}>
+        <div className="edit-box">{message || 'No s’ha pogut carregar el perfil.'}</div>
       </div>
     );
   }
@@ -196,4 +218,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditProfile;*/
