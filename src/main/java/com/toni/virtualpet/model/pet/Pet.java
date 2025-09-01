@@ -69,36 +69,6 @@ public class Pet extends AuditableEntity {
         this.stage = Stage.getStageForExperience(this.experience);
     }
 
-    /*public void feed() {
-        this.hunger = Math.min(100 , this.hunger + 20);
-        this.happiness = Math.min(100 , this.happiness + 10);
-        this.setLastAction(LocalDateTime.now());
-        addExperience(1);
-    }*/
-
-    /*public void play() {
-        this.happiness = Math.min(100 , this.happiness + 15);
-        this.energy = Math.max(0 , this.energy - 10);
-        this.hunger = Math.max(0 , this.hunger - 5);
-        this.setLastAction(LocalDateTime.now());
-        addExperience(1);
-    }*/
-
-    /*public void rest () {
-        this.energy = Math.min(100 , this.energy + 25);
-        this.happiness = Math.min(100 , this.happiness + 5);
-        this.hunger = Math.max(0 , this.hunger - 5);
-        this.setLastAction(LocalDateTime.now());
-        addExperience(1);
-    }*/
-
-    /*public void ignore () {
-        this.happiness = Math.max(0, this.happiness - 10);
-        this.energy = Math.max(0, this.energy - 5);
-        this.hunger = Math.max(0, this.hunger - 5);
-        this.setLastAction(LocalDateTime.now());
-    }*/
-
     public boolean canEvolve() {
         return this.experience >= this.stage.getMaxExperience() + 1 && this.stage != Stage.ANCIENT;
     }
