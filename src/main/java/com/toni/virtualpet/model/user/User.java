@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -48,6 +49,9 @@ public class User extends AuditableEntity {
 
     @OneToMany(mappedBy = "owner" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
     private List<Pet> pets;
+
+    @Column(name = "last_pet_action")
+    private LocalDateTime lastPetAction;
 
     @Override
     public String toString() {

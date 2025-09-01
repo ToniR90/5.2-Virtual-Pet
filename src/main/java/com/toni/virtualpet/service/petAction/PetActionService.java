@@ -6,6 +6,7 @@ import com.toni.virtualpet.model.petAction.PetAction;
 import com.toni.virtualpet.model.petAction.enums.ActionType;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.repository.PetActionRepository;
+import com.toni.virtualpet.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 public class PetActionService {
 
     private final PetActionRepository petActionRepository;
+    private final UserRepository userRepository;
 
     public Pet applyAction(Pet pet, User user, ActionType actionType) {
         switch (actionType) {
@@ -49,6 +51,7 @@ public class PetActionService {
         }
 
         pet.setLastAction(LocalDateTime.now());
+        user.setLastPetAction(LocalDateTime.now());
         pet.addExperience(actionType.getExperienceReward());
 
         PetAction action = PetAction.builder()
@@ -59,6 +62,7 @@ public class PetActionService {
                 .build();
 
         petActionRepository.save(action);
+        userRepository.save(user);
         return pet;
     }
 

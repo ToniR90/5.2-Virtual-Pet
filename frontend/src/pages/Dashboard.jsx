@@ -53,13 +53,10 @@ const Dashboard = () => {
         <h2>👋 Welcome back, {user.username}</h2>
 
         <hr />
-
-        {/* Opcions comunes per tots els rols */}
         <button onClick={() => navigate('/profile')}>👤 View Profile</button>
         <button onClick={() => navigate('/pets')}>🐾 View My Pets</button>
         <button onClick={() => navigate('/pets/create')}>➕ Create Pet</button>
 
-        {/* Opcions per ADMIN i SUPER_ADMIN */}
         {isAdmin && (
           <>
             <hr />
@@ -68,7 +65,6 @@ const Dashboard = () => {
           </>
         )}
 
-        {/* Opció exclusiva per SUPER_ADMIN */}
         {isSuperAdmin && (
           <>
             <hr />

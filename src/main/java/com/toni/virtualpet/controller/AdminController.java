@@ -6,7 +6,11 @@ import com.toni.virtualpet.dto.response.UserResponse;
 import com.toni.virtualpet.model.user.User;
 import com.toni.virtualpet.model.pet.enums.Stage;
 import com.toni.virtualpet.model.pet.enums.Variant;
+import com.toni.virtualpet.model.user.enums.Role;
+import com.toni.virtualpet.service.pet.PetService;
 import com.toni.virtualpet.service.user.AdminService;
+import com.toni.virtualpet.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +32,8 @@ public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     private AdminService adminService;
+    private UserService userService;
+    private PetService petService;
 
     @GetMapping("/pets")
     public ResponseEntity<ApiResponse<List<PetResponse>>> getAllPets() {
@@ -114,6 +120,43 @@ public class AdminController {
         return ResponseEntity.ok(
                 ApiResponse.success(stage + " stage dragons retrieved", pets)
         );
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<ApiResponse<Void>> deleteUserById(@PathVariable Long userId) {
+        logger.info("Admin attempting to delete user ID: {}", userId);
+
+        User currentUser = userService.getCurrentUser();
+        UserResponse targetUser = adminService.getUserById(userId);
+
+
+        if (currentUser.getId().equals(targetUser.getId())) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Cannot delete yourself"));
+        }
+
+        if (currentUser.getRole() == Role.ROLE_ADMIN && targetUser.getRole() != Role.ROLE_USER) {
+            return ResponseEntity.status(403).body(ApiResponse.error("You don't have authorization to delete that user"));
+        }
+
+        adminService.deleteUserById(userId);
+        logger.info("Usuari {} eliminat per {}", userId, currentUser.getUsername());
+        return ResponseEntity.ok(ApiResponse.success("Usuari eliminat correctament", null));
+    }
+
+    @GetMapping("/users/{userId}/pet-count")
+    public ResponseEntity<ApiResponse<Long>> getPetCountByUser(@PathVariable Long userId) {
+        long count = petService.countPetsByOwner(userId);
+        return ResponseEntity.ok(ApiResponse.success("Nombre de mascotes", count));
+    }
+
+    @PutMapping("/roles/{userId}/toggle")
+    public ResponseEntity<ApiResponse<UserResponse>> toggleUserRole(@PathVariable Long userId) {
+        UserResponse targetUser = adminService.getUserById(userId);
+
+        Role newRole = targetUser.getRole() == Role.ROLE_USER ? Role.ROLE_ADMIN : Role.ROLE_USER;
+        targetUser.setRole(newRole);
+
+        return ResponseEntity.ok(ApiResponse.success("Rol actualitzat", targetUser));
     }
 
     @GetMapping("/dashboard")

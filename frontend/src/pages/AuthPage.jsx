@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ Necessari per redirigir
+import { useNavigate } from 'react-router-dom';
 import background from '../assets/background.jpg';
 import './AuthPage.css';
 import RegisterForm from '../components/RegisterForm';
@@ -7,8 +7,8 @@ import { saveToken } from '../utils/auth';
 
 const AuthPage = () => {
   const [isRegistering, setIsRegistering] = useState(false);
-  const [formData, setFormData] = useState({ username: '', password: '' }); // ✅ Captura inputs
-  const navigate = useNavigate(); // ✅ Per redirigir després del login
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const navigate = useNavigate();
 
   const containerStyle = {
     backgroundImage: `url(${background})`,
@@ -24,7 +24,6 @@ const AuthPage = () => {
     position: 'relative',
   };
 
-  // ✅ Aquesta funció s'executa quan l'usuari fa "Sign In"
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,10 +35,10 @@ const AuthPage = () => {
       });
 
       const data = await response.json();
-      console.log('Login response:', data); // 👉 Aquí veuràs què retorna el backend
+      console.log('Login response:', data);
 
       if (response.ok) {
-        saveToken(data.data.token); // 👈 Assegura’t que accedeixes correctament al token
+        saveToken(data.data.token);
         navigate('/dashboard');
       } else {
         alert(data.message || 'Login failed');
@@ -49,7 +48,6 @@ const AuthPage = () => {
     }
   };
 
-  // ✅ Actualitza el valor dels inputs
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -61,7 +59,7 @@ const AuthPage = () => {
       ) : (
         <div className="login-box">
           <h2>🐉Welcome to your Virtual Pet Manager!!🐉</h2>
-          <form onSubmit={handleSubmit}> {/* ✅ Afegim la funció de submit */}
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               name="username"

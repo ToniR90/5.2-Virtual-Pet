@@ -59,6 +59,7 @@ const PetDetail = () => {
         <p><strong>Experiencia:</strong> {pet.experience}</p>
         <p><strong>Energia:</strong> {pet.energy}</p>
         <p><strong>Felicitat:</strong> {pet.happiness}</p>
+        <p><strong>Saciedad:</strong> {pet.hunger}</p>
       </div>
 
       <div className="pet-actions">
@@ -66,7 +67,6 @@ const PetDetail = () => {
         <button onClick={() => handleAction('feed')}>🍗 Alimentar</button>
         <button onClick={() => handleAction('rest')}>🛌 Descansar</button>
         <button onClick={() => handleAction('ignore')}>🙈 Ignorar</button>
-        <button onClick={() => handleAction('evolve')}>✨ Evolucionar</button>
       </div>
     </div>
   );

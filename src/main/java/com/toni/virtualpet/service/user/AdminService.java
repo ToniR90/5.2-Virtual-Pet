@@ -100,4 +100,8 @@ public class AdminService {
     public List<User> getUserByRole(Role role) {
         return userRepository.findByRole(role);
     }
+
+    public void deleteUserById(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }

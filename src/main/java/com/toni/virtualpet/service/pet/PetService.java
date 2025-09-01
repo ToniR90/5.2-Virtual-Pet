@@ -50,6 +50,10 @@ public class PetService {
         return PetResponse.from(savedPet);
     }
 
+    public long countPetsByOwner(Long id) {
+        return petRepository.countPetsByOwnerId(id);
+    }
+
     public List<PetResponse> getUserPets() {
         User currentUser = userService.getCurrentUser();
         logger.info("Getting pets from user: {}" , currentUser.getUsername());
