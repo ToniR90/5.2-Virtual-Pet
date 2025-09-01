@@ -8,9 +8,9 @@ import eggSwamp from '../assets/sprites/SWAMP-EGG.png';
 import eggForest from '../assets/sprites/FOREST-EGG.png';
 
 const eggOptions = [
-  { variant: 'MOUNTAIN', label: 'Drac de Muntanya', sprite: eggMountain },
-  { variant: 'SWAMP', label: 'Drac de Pantà', sprite: eggSwamp },
-  { variant: 'FOREST', label: 'Drac de Bosc', sprite: eggForest },
+  { variant: 'MOUNTAIN', label: '🔥 Strong mountain dragon 🔥', sprite: eggMountain },
+  { variant: 'SWAMP', label: '💀 Scary swamp dragon 💀', sprite: eggSwamp },
+  { variant: 'FOREST', label: '🍃 Harmonic forest dragon 🍃', sprite: eggForest },
 ];
 
 const CreatePet = () => {
@@ -21,12 +21,12 @@ const CreatePet = () => {
 
   const handleCreate = () => {
     if (!selectedVariant || !name.trim()) {
-      setError('Has de seleccionar un ou i escriure un nom!');
+      setError('Select an egg and name it!');
       return;
     }
 
     const token = getToken();
-    console.log('🔧 Creant mascota:', { name, variant: selectedVariant });
+    console.log('🔧 Creating pet:', { name, variant: selectedVariant });
 
     fetch('http://localhost:8080/api/pets', {
       method: 'POST',
@@ -38,12 +38,12 @@ const CreatePet = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('✅ Mascota creada:', data);
+        console.log('✅ Pet successfully created:', data);
         navigate('/pets');
       })
       .catch(err => {
-        console.error('❌ Error creant mascota:', err);
-        setError('No s’ha pogut crear la mascota');
+        console.error('❌ Error creating pet:', err);
+        setError('Pet could not be created');
       });
   };
 
@@ -61,14 +61,13 @@ const CreatePet = () => {
 
   return (
     <div style={containerStyle}>
-      {/* Botó fixat a dalt a l'esquerra */}
       <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Tornar
+        ← Back
       </button>
 
       <div className="create-pet-container">
-        <h2>🐣 Crea la teva mascota</h2>
-        <p>Selecciona un ou i escriu el nom del teu drac</p>
+        <h2>🦎 Create your pet! 🦎</h2>
+        <p>Select an egg and name it!</p>
 
         <div className="egg-selection">
           {eggOptions.map(egg => (
@@ -76,7 +75,7 @@ const CreatePet = () => {
               key={egg.variant}
               className={`egg-card ${selectedVariant === egg.variant ? 'selected' : ''}`}
               onClick={() => {
-                console.log('✅ Ou seleccionat:', egg.variant);
+                console.log('✅ Egg selected:', egg.variant);
                 setSelectedVariant(egg.variant);
               }}
             >
@@ -88,7 +87,7 @@ const CreatePet = () => {
 
         <input
           type="text"
-          placeholder="Nom del drac..."
+          placeholder="Dragon name..."
           value={name}
           onChange={e => setName(e.target.value)}
           className="pet-name-input"
@@ -97,7 +96,7 @@ const CreatePet = () => {
         {error && <p className="error-msg">{error}</p>}
 
         <button className="create-button" onClick={handleCreate}>
-          Crear mascota
+          Create pet
         </button>
       </div>
     </div>
