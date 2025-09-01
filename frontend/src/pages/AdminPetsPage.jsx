@@ -25,7 +25,7 @@ const AdminPetsPage = () => {
       .then(res => res.json())
       .then(data => setPets(data.data))
       .catch(err => {
-        console.error('Error carregant mascotes:', err);
+        console.error('Cannot load the pets:', err);
         navigate('/');
       });
   }, [navigate]);
@@ -39,14 +39,14 @@ const AdminPetsPage = () => {
       });
       if (res.ok) {
         setPets(prev => prev.filter(p => p.id !== petId));
-        setMessage('✅ Mascota eliminada correctament');
+        setMessage('✅ Pet deleted successfully');
       } else {
         const result = await res.json();
-        setMessage('❌ Error: ' + (result.message || 'Error inesperat'));
+        setMessage('❌ Error: ' + (result.message || 'Unexpected error'));
       }
     } catch (err) {
-      console.error('Error eliminant mascota:', err);
-      setMessage('❌ Error inesperat');
+      console.error('Error deleting pet:', err);
+      setMessage('❌ Unexpected error');
     }
   };
 
@@ -70,11 +70,11 @@ const AdminPetsPage = () => {
     <div style={containerStyle}>
       <div style={{ position: 'relative', zIndex: 1, height: '100vh', overflowY: 'auto' }}>
         <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Tornar
+          ← Back
         </button>
 
         <div className="admin-pets-container">
-          <h2>🐾 Gestió de mascotes</h2>
+          <h2>🐾 Pet management 🐾</h2>
           {message && <p className="message">{message}</p>}
 
           <div className="pets-grid">
@@ -95,7 +95,7 @@ const AdminPetsPage = () => {
                   <p><strong>Estat:</strong> {pet.stage}</p>
 
                   <div className="actions">
-                    <button onClick={() => handleDelete(pet.id)}>🗑️ Eliminar</button>
+                    <button onClick={() => handleDelete(pet.id)}>🗑️ Delete</button>
                   </div>
                 </div>
               );
