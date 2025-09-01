@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
-import dashboardBg from '../assets/dashboard.jpg'; // Imatge de fons
+import dashboardBg from '../assets/dashboard.jpg';
 import './MyPets.css';
 
-// Obté el sprite segons tipus i etapa
 const getSpritePath = (variant, stage) => {
   try {
     return require(`../assets/sprites/${variant}-${stage}.png`);
@@ -16,6 +16,7 @@ const MyPets = () => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = getToken();
@@ -45,6 +46,11 @@ const MyPets = () => {
 
   return (
     <div style={containerStyle}>
+      {/* Botó fora del contenidor principal */}
+      <button className="back-button" onClick={() => navigate('/dashboard')}>
+        ← Tornar
+      </button>
+
       <div className="pets-box">
         <h2>🐾 Les meves mascotes</h2>
         {loading && <p>Carregant mascotes...</p>}

@@ -1,12 +1,32 @@
 .pets-box {
+  position: relative; /* 👈 Permet posicionar el botó dins */
   padding: 2rem;
   color: white;
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(0, 0, 0, 0.5); /* Lleuger fons translúcid */
   border-radius: 12px;
   max-width: 800px;
   margin: 2rem auto;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   text-align: center;
+}
+
+/* Botó de retorn al dashboard */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid white;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .pets-grid {

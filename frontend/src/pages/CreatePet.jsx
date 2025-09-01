@@ -20,9 +20,6 @@ const CreatePet = () => {
   const navigate = useNavigate();
 
   const handleCreate = () => {
-    console.log('🧪 selectedVariant:', selectedVariant);
-    console.log('🧪 name:', name);
-
     if (!selectedVariant || !name.trim()) {
       setError('Has de seleccionar un ou i escriure un nom!');
       return;
