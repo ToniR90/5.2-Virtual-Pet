@@ -26,14 +26,14 @@ const ProfilePage = () => {
         setLoading(false);
       })
       .catch(err => {
-        console.error('Error carregant perfil:', err);
+        console.error('Error loading profile:', err);
         setLoading(false);
         navigate('/');
       });
   }, [navigate]);
 
   const handleDeleteAccount = async () => {
-    const confirm = window.confirm('Estàs segur que vols eliminar el teu compte? Aquesta acció és irreversible.');
+    const confirm = window.confirm('Are you sure you want to delete your account? This action is irreversible.');
     if (!confirm) return;
 
     const token = getToken();
@@ -51,8 +51,8 @@ const ProfilePage = () => {
         setMessage('❌ Error: ' + result.message);
       }
     } catch (err) {
-      console.error('Error eliminant compte:', err);
-      setMessage('❌ Error inesperat');
+      console.error('Error deleting account:', err);
+      setMessage('❌ Unexpected error');
     }
   };
 
@@ -73,9 +73,9 @@ const ProfilePage = () => {
     return (
       <div style={containerStyle}>
         <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Tornar
+          ← Back
         </button>
-        <div className="profile-box">Carregant perfil...</div>
+        <div className="profile-box">Loading profile...</div>
       </div>
     );
   }
@@ -84,9 +84,9 @@ const ProfilePage = () => {
     return (
       <div style={containerStyle}>
         <button className="back-button" onClick={() => navigate('/dashboard')}>
-          ← Tornar
+          ← Back
         </button>
-        <div className="profile-box">No s’ha pogut carregar el perfil.</div>
+        <div className="profile-box">Failed to load profile.</div>
       </div>
     );
   }
@@ -94,17 +94,17 @@ const ProfilePage = () => {
   return (
     <div style={containerStyle}>
       <button className="back-button" onClick={() => navigate('/dashboard')}>
-        ← Tornar
+        ← Back
       </button>
 
       <div className="profile-box">
-        <h2>👤 Perfil</h2>
+        <h2>👤 Profile 👤</h2>
         <p><strong>Usuari:</strong> {user.username}</p>
         <p><strong>Email:</strong> {user.email}</p>
         <p><strong>Rol:</strong> {user.role}</p>
 
         <button className="delete-button" onClick={handleDeleteAccount}>
-          🗑️ Eliminar compte
+          🗑️ Delete account
         </button>
 
         {message && <p className="message">{message}</p>}
