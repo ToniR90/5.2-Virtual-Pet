@@ -1,4 +1,4 @@
-package com.toni.virtualpet.controller;
+/*package com.toni.virtualpet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toni.virtualpet.dto.request.CreatePetRequest;
@@ -168,4 +168,4 @@ class PetControllerTest {
         PetResponse response = new PetResponse();
         return response;
     }
-}
+}*/

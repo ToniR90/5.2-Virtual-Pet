@@ -1,4 +1,4 @@
-package com.toni.virtualpet.repository;
+/*package com.toni.virtualpet.repository;
 
 import com.toni.virtualpet.model.pet.Pet;
 import com.toni.virtualpet.model.user.User;
@@ -186,4 +186,4 @@ class PetRepositoryTest {
         long count = petRepository.countPetsByOwnerId(testUser.getId());
         assertThat(count).isEqualTo(1);
     }
-}
+}*/

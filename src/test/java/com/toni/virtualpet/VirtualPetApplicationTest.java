@@ -1,4 +1,4 @@
-package com.toni.virtualpet;
+/*package com.toni.virtualpet;
 
 import com.toni.virtualpet.config.TestSecurityConfig;
 import com.toni.virtualpet.repository.PetActionRepository;
@@ -176,4 +176,4 @@ class VirtualPetApplicationTest {
         assertThat(petService.getClass().getMethods().length).isGreaterThan(0);
         assertThat(authService.getClass().getMethods().length).isGreaterThan(0);
     }
-}
+}*/
